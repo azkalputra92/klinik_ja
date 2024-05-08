@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m240508_101121_create_import_data_pasien_dan_riwayat_pasien
+ * Class m240508_101121_create_data_pasien
  */
-class m240508_101121_create_import_data_pasien_dan_riwayat_pasien extends Migration
+class m240508_101121_create_data_pasien extends Migration
 {
     /**
      * {@inheritdoc}
