@@ -28,6 +28,9 @@ return [
                 ],
             ]
         ],
+        'helper' => [
+            'class' => 'common\components\Helper',
+        ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager', // only support DbManager
         ],
@@ -41,25 +44,25 @@ return [
             'datetimeFormat' => 'php:d-M-Y H:i:s',
             'nullDisplay' => '-'
         ],
-        // 'assetManager' => [
-        //     // 'hashCallback' => function ($path) {
-        //     //     return hash('md4', $path);
-        //     // }
-        //     'bundles' => [
-        //         // 'yii\bootstrap5\BootstrapPluginAsset' => [
-        //         //     'js' => []
-        //         // ],
-        //         // 'yii\web\JqueryAsset' => [
-        //         //     'js'=>[]
-        //         // ],
-        //         'yii\bootstrap5\BootstrapAsset' => [
-        //             'css' => []
-        //         ],
-        //     ],
-        // ],
         'assetManager' => [
-            'appendTimestamp' => true,
+            // 'hashCallback' => function ($path) {
+            //     return hash('md4', $path);
+            // }
+            'bundles' => [
+                // 'yii\bootstrap5\BootstrapPluginAsset' => [
+                //     'js' => []
+                // ],
+                // 'yii\web\JqueryAsset' => [
+                //     'js'=>[]
+                // ],
+                'yii\bootstrap5\BootstrapAsset' => [
+                    'css' => []
+                ],
+            ],
         ],
+        // 'assetManager' => [
+        //     'appendTimestamp' => true,
+        // ],
     ],
     'modules' => [
         
@@ -70,13 +73,12 @@ return [
             'class' => 'yii\gii\Module',
             'generators' => [
                 'crud-custom'   => [
-                    'class' => 'common\generators\Generator',
+                    'class' => 'common\generator\Generator',
                 ],
             ],
         ],
-        'gridview' => [
-            'class' => '\kartik\grid\Module',
-            // 'bsVersion' => '5.x',
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module'
         ],
         'datecontrol' =>  [
             'class' => 'kartik\datecontrol\Module',

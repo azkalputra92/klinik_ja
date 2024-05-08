@@ -1,6 +1,7 @@
 <?php
-
-namespace common\generators;
+// namespace hoaaah\ajaxcrud\generators;
+// namespace common\costumtemplate;
+namespace common\generator;
 
 use Yii;
 use yii\db\ActiveRecord;
@@ -10,7 +11,6 @@ use yii\gii\CodeFile;
 use yii\helpers\Inflector;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
-
 /**
  * Generates CRUD
  *
@@ -37,7 +37,7 @@ class Generator extends \yii\gii\Generator
      */
     public function getName()
     {
-        return 'Ajax CRUD Generator - CUSTOM';
+        return 'Custom Template CRUD Generator';
     }
 
     /**
@@ -45,7 +45,8 @@ class Generator extends \yii\gii\Generator
      */
     public function getDescription()
     {
-        return 'Generator hasil custom';
+        return 'This generator generates a controller and views that implement CRUD (Create, Read, Update, Delete)
+            operations for the specified data model with template for Single Page Ajax Administration';
     }
 
     /**
@@ -93,7 +94,7 @@ class Generator extends \yii\gii\Generator
         return array_merge(parent::hints(), [
             'modelClass' => 'This is the ActiveRecord class associated with the table that CRUD will be built upon.
                 You should provide a fully qualified class name, e.g., <code>app\models\Post</code>.',
-            'controllerClass' => 'This is the name of the controller class to be generated. You should
+             'controllerClass' => 'This is the name of the controller class to be generated. You should
                 provide a fully qualified namespaced class (e.g. <code>app\controllers\PostController</code>),
                 and class name should be in CamelCase with an uppercase first letter. Make sure the class
                 is using the same namespace as specified by your application\'s controllerNamespace property.',
@@ -128,7 +129,7 @@ class Generator extends \yii\gii\Generator
      */
     public function validateModelClass()
     {
-        /* @var $class ActiveRecord */
+        /* @var $class ActiveRecord */     
         $class = $this->modelClass;
         $pk = $class::primaryKey();
         if (empty($pk)) {
@@ -234,7 +235,7 @@ class Generator extends \yii\gii\Generator
                     $dropDownOptions[$enumValue] = Inflector::humanize($enumValue);
                 }
                 return "\$form->field(\$model, '$attribute')->dropDownList("
-                    . preg_replace("/\n\s*/", ' ', VarDumper::export($dropDownOptions)) . ", ['prompt' => ''])";
+                    . preg_replace("/\n\s*/", ' ', VarDumper::export($dropDownOptions)).", ['prompt' => ''])";
             } elseif ($column->phpType !== 'string' || $column->size === null) {
                 return "\$form->field(\$model, '$attribute')->$input()";
             } else {
@@ -401,23 +402,24 @@ class Generator extends \yii\gii\Generator
                 case Schema::TYPE_TIME:
                 case Schema::TYPE_DATETIME:
                 case Schema::TYPE_TIMESTAMP:
-                    $hashConditions[] = "'{$column}' => \$this->{$column},";
+                    $hashConditions[] = "['{$column}' => \$cari_angka],";
                     break;
                 default:
-                    $likeConditions[] = "->andFilterWhere(['like', '{$column}', \$this->{$column}])";
+                    $likeConditions[] = "['ilike', '{$column}', \$this->cari],";
                     break;
             }
         }
 
         $conditions = [];
-        if (!empty($hashConditions)) {
-            $conditions[] = "\$query->andFilterWhere([\n"
-                . str_repeat(' ', 12) . implode("\n" . str_repeat(' ', 12), $hashConditions)
-                . "\n" . str_repeat(' ', 8) . "]);\n";
-        }
-        if (!empty($likeConditions)) {
-            $conditions[] = "\$query" . implode("\n" . str_repeat(' ', 12), $likeConditions) . ";\n";
-        }
+        // if (!empty($hashConditions)) {
+            $conditions[] = "\$query->andFilterWhere(['or',\n"
+                .str_repeat(' ', 12) . implode("\n" . str_repeat(' ', 12), $hashConditions)."\n"
+                .str_repeat(' ', 12) . implode("\n" . str_repeat(' ', 12), $likeConditions)
+                ."\n" . str_repeat(' ', 8) . "]);";
+        // }
+        // if (!empty($likeConditions)) {
+        //     $conditions[] = "\$query" . implode("\n" . str_repeat(' ', 12), $likeConditions) . ";\n";
+        // }
 
         return $conditions;
     }

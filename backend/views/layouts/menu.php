@@ -25,11 +25,11 @@ $this->registerJs("
 
     $menuItems[] = [
         'label' => '<i class="bi bi-circle"></i><span>Data Pasien</span>',
-        'url' => ['/site/index']
+        'url' => ['/pasien/create']
     ];
     $menuItems[] = [
         'label' => '<i class="bi bi-circle"></i><span>Rekam Medis</span>',
-        'url' => ['/tes']
+        'url' => ['/pasien/index']
     ];
     $menuItems[] = [
         'label' => '<i class="bi bi-circle"></i><span>Keluar</span>',

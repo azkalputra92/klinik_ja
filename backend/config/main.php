@@ -47,6 +47,11 @@ return [
         //     'rules' => [
         //     ],
         // ],
+    ],'modules' => [
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module',
+            'bsVersion' => '5.x',
+        ]
     ],
     'params' => $params,
 ];
