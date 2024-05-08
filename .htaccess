@@ -1,0 +1,38 @@
+Options +FollowSymlinks
+RewriteEngine On
+
+
+# untuk backend
+# RewriteCond %{REQUEST_URI} ^/(admin)
+# RewriteRule ^admin/css/(.*)$ backend/web/css/$1 [L]
+# RewriteRule ^admin/js/(.*)$ backend/web/js/$1 [L]
+# RewriteRule ^admin/fonts/(.*)$ backend/web/fonts/$1 [L]
+# RewriteRule ^admin/img/(.*)$ backend/web/img/$1 [L]
+# RewriteRule ^admin/assets/(.*)$ backend/web/assets/$1 [L]
+# # ========Jika tidak memenuhi kondisi di atas, maka arahkan ke index.php======== #
+# RewriteCond %{REQUEST_URI} !^/admin/web/(css|assets|js|fonts|img)/
+# RewriteCond %{REQUEST_URI} ^/(admin)
+# RewriteRule ^.*$ backend/web/index.php [L]
+# ============================================================================== #
+# ============================================================================== #
+
+
+# ============================================================================== #
+RewriteRule ^css/(.*)$ backend/web/css/$1 [L]
+RewriteRule ^fonts/(.*)$ backend/web/fonts/$1 [L]
+RewriteRule ^js/(.*)$ backend/web/js/$1 [L]
+RewriteRule ^less/(.*)$ backend/web/less/$1 [L]
+RewriteRule ^images/(.*)$ backend/web/images/$1 [L]
+RewriteRule ^gif/(.*)$ backend/web/gif/$1 [L]
+RewriteRule ^img/(.*)$ backend/web/img/$1 [L]
+RewriteRule ^upload/(.*)$ backend/web/upload/$1 [L]
+RewriteRule ^assets/(.*)$ backend/web/assets/$1 [L]
+RewriteRule ^common/(.*)$ common/$1 [L]
+
+# ========Jika tidak memenuhi kondisi di atas, maka arahkan ke index.php======== #
+RewriteCond %{REQUEST_URI} !^/(dashboard|backend)/web/(css|less|js|images|img|assets|upload|fonts|img|gif)/
+RewriteCond %{REQUEST_URI} !index.php
+RewriteCond %{REQUEST_FILENAME} !-f [OR]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ backend/web/index.php
+# ============================================================================== #
