@@ -30,6 +30,7 @@ class AppAsset extends AssetBundle
         // 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.2.3/themes/fas/theme.min.js'
 
         'js/main.js',
+        'js/custom.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

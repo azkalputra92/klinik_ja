@@ -45,11 +45,13 @@ class PasienSearch extends Pasien
     {
         $query = Pasien::find();
 
+        $this->load($params);
+        
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => ['defaultOrder' => ['id' => SORT_DESC]],
         ]);
 
-        $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -62,14 +64,9 @@ class PasienSearch extends Pasien
         }
 
         $query->andFilterWhere(['or',
-            ['id' => $cari_angka],
-            ['umur_pasien' => $cari_angka],
-            ['created_at' => $cari_angka],
-            ['updated_at' => $cari_angka],
-            ['created_by' => $cari_angka],
-            ['updated_by' => $cari_angka],
+            // ['id' => $cari_angka],
             ['ilike', 'nama_pasien', $this->cari],
-            ['ilike', 'jenis_kelamin', $this->cari],
+            // ['ilike', 'jenis_kelamin', $this->cari],
         ]);
         // $query->andFilterWhere(['ilike', '', $this->cari]);
         return $dataProvider;

@@ -3,6 +3,8 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "riwayat_medis_pasien".
@@ -43,6 +45,7 @@ class RiwayatMedisPasien extends \yii\db\ActiveRecord
         return [
             [['id_pasien', 'meriang', 'sakit_kepala', 'batuk', 'diare', 'nyeri_otot', 'mual', 'endemik', 'demam', 'keringat_dingin', 'dehidrasi', 'hasil', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'default', 'value' => null],
             [['id_pasien', 'meriang', 'sakit_kepala', 'batuk', 'diare', 'nyeri_otot', 'mual', 'endemik', 'demam', 'keringat_dingin', 'dehidrasi', 'hasil', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['id_pasien', 'meriang', 'sakit_kepala', 'batuk', 'diare', 'nyeri_otot', 'mual', 'endemik', 'demam', 'keringat_dingin', 'dehidrasi'], 'required'],
         ];
     }
 
@@ -70,5 +73,16 @@ class RiwayatMedisPasien extends \yii\db\ActiveRecord
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
         ];
+    }
+    public function behaviors()
+    {
+        return [
+            BlameableBehavior::class,
+            TimestampBehavior::class,
+        ];
+    }
+    public function getPasien()
+    {
+        return $this->hasOne(Pasien::class, ['id' => 'id_pasien']);
     }
 }

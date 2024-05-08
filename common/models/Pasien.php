@@ -36,7 +36,9 @@ class Pasien extends \yii\db\ActiveRecord
         return [
             [['umur_pasien', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'default', 'value' => null],
             [['umur_pasien', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['nama_pasien', 'jenis_kelamin', 'umur_pasien'], 'required'],
             [['nama_pasien', 'jenis_kelamin'], 'string', 'max' => 255],
+            [['nama_pasien','umur_pasien', 'jenis_kelamin'], 'required'],
             [['alamat'], 'safe'],
         ];
     }

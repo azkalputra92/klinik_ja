@@ -5,13 +5,14 @@ namespace backend\controllers;
 use Yii;
 use common\models\Pasien;
 use backend\models\PasienSearch;
+use common\models\RiwayatMedisPasien;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
 use yii\filters\AccessControl;
-
+use yii\helpers\Url;
 
 /**
  * PasienController implements the CRUD actions for Pasien model.
@@ -19,9 +20,9 @@ use yii\filters\AccessControl;
 class PasienController extends Controller
 {
     /**
-    * @inheritdoc
-    */
-    public function behaviors() 
+     * @inheritdoc
+     */
+    public function behaviors()
     {
         return [
             'access' => [
@@ -32,7 +33,7 @@ class PasienController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                     ],
-                ],  
+                ],
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -44,9 +45,9 @@ class PasienController extends Controller
     }
 
     /**
-    * Lists all Pasien models.
-    * @return mixed
-    */
+     * Lists all Pasien models.
+     * @return mixed
+     */
     public function actionIndex()
     {
         $searchModel = new PasienSearch();
@@ -59,24 +60,24 @@ class PasienController extends Controller
     }
 
     /**
-    * Displays a single Pasien model.
-    * @param integer $id
-    * @return mixed
-    */
+     * Displays a single Pasien model.
+     * @param integer $id
+     * @return mixed
+     */
     public function actionView($id)
     {
         $request = Yii::$app->request;
-        if($request->isAjax){
+        if ($request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                'title'=> "Pasien",
-                'content'=>$this->renderAjax('view', [
+                'title' => "Pasien",
+                'content' => $this->renderAjax('view', [
                     'model' => $this->findModel($id),
                 ]),
-                'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-bs-dismiss'=>"modal"]).
-                        Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                'footer' => Html::button('Close', ['class' => 'btn btn-default pull-left', 'data-bs-dismiss' => "modal"]) .
+                    Html::a('Edit', ['update', 'id' => $id], ['class' => 'btn btn-primary', 'role' => 'modal-remote'])
             ];
-        }else{
+        } else {
             return $this->render('view', [
                 'model' => $this->findModel($id),
             ]);
@@ -84,112 +85,107 @@ class PasienController extends Controller
     }
 
     /**
-    * Creates a new Pasien model.
-    * For ajax request will return json object
-    * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
-    * @return mixed
-    */
+     * Creates a new Pasien model.
+     * For ajax request will return json object
+     * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
     public function actionCreate()
     {
         $request = Yii::$app->request;
         $model = new Pasien();
 
-        if($request->isAjax){
+        if ($request->isAjax) {
             /*
             * Process for ajax request
             */
             Yii::$app->response->format = Response::FORMAT_JSON;
-            if($request->isGet){
-                return [
-                    'title'=> "Tambah Data Pasien",
-                    'content'=>$this->renderAjax('create', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Tutup',['class'=>'btn btn-default pull-left fs-14','data-bs-dismiss'=>"modal"]).
-                            Html::button('Simpan',['class'=>'btn btn-primary fs-14','type'=>"submit"])
-                ];
-            } else if($model->load($request->post()) && $model->save()){
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Tambah Data Pasien",
-                    'content' => '<div class="d-flex flex-column justify-content-center align-items-center mb-5">
-                            <img src="/images/success.gif" >
-                            <span class="fs-14">Berhasil Menambah Data</span>
-                        </div>',
-                    'footer'=> Html::button('Tutup',['class'=>'btn btn-default pull-left fs-14','data-bs-dismiss'=>"modal"]).
-                            Html::a('Tambah Lagi',['create'],['class'=>'btn btn-primary fs-14','role'=>'modal-remote'])
-                ];
-            } else{
-                return [
-                    'title'=> "Tambah Data Pasien",
-                    'content'=>$this->renderAjax('create', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Tutup',['class'=>'btn btn-default pull-left fs-14','data-bs-dismiss'=>"modal"]).
-                            Html::button('Simpan',['class'=>'btn btn-primary fs-14','type'=>"submit"])
-                ];
+            if ($model->load($request->post()) && $model->save()) {
+
+                $redirect =  Url::base(true) . '/pasien/index';
+                return $this->asJson([
+                    'success' => true,
+                    'reset' => true,
+                    'title' => " ",
+                    'content' => "<div class='d-flex justify-content-center mb-3'><img src='/gif/konfirmasisukses.gif' width='150'></div>
+                                <h5 class='text-dark text-center pb-2'>Berhasil tambah data</h5>
+                                <script> redirectPage('$redirect');</script>
+                            ",
+                    'footer' => false,
+                ]);
             }
-        }else{
+            $result = [];
+            // The code below comes from ActiveForm::validate(). We do not need to validate the model
+            // again, as it was already validated by save(). Just collect the messages.
+            foreach ($model->getErrors() as $attribute => $errors) {
+                $result[Html::getInputId($model, $attribute)] = $errors;
+            }
+
+            if (!empty($result)) {
+                return $this->asJson(['validation' => $result]);
+            }
+
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        } else {
             /*
             * Process for non-ajax request
             */
-            if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            } else{
-                return $this->render('create', [
-                    'model' => $model,
-                ]);
-            }
+
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         }
     }
 
     /**
-    * Updates an existing Pasien model.
-    * For ajax request will return json object
-    * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
-    * @param integer $id
-    * @return mixed
-    */
+     * Updates an existing Pasien model.
+     * For ajax request will return json object
+     * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
     public function actionUpdate($id)
     {
         $request = Yii::$app->request;
         $model = $this->findModel($id);
 
-        if($request->isAjax){
+        if ($request->isAjax) {
             /*
             * Process for ajax request
             */
             Yii::$app->response->format = Response::FORMAT_JSON;
-            if($request->isGet){
+            if ($request->isGet) {
                 return [
-                    'title'=> "Ubah Data Pasien",
-                    'content'=>$this->renderAjax('update', [
+                    'title' => "Ubah Data Pasien",
+                    'content' => $this->renderAjax('update', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Tutup',['class'=>'btn btn-default pull-left','data-bs-dismiss'=>"modal"]).
-                            Html::button('Simpan',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer' => Html::button('Tutup', ['class' => 'btn btn-default pull-left', 'data-bs-dismiss' => "modal"]) .
+                        Html::button('Simpan', ['class' => 'btn btn-primary', 'type' => "submit"])
                 ];
-            }else if($model->load($request->post()) && $model->save()){
+            } else if ($model->load($request->post()) && $model->save()) {
                 return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Pasien #".$id,
-                    'content'=>$this->renderAjax('view', [
+                    'forceReload' => '#crud-datatable-pjax',
+                    'title' => "Pasien #" . $id,
+                    'content' => $this->renderAjax('view', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Tutup',['class'=>'btn btn-default pull-left','data-bs-dismiss'=>"modal"]).
-                            Html::a('Ubah',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                    'footer' => Html::button('Tutup', ['class' => 'btn btn-default pull-left', 'data-bs-dismiss' => "modal"]) .
+                        Html::a('Ubah', ['update', 'id' => $id], ['class' => 'btn btn-primary', 'role' => 'modal-remote'])
                 ];
-            }else{
+            } else {
                 return [
-                    'title'=> "Ubah Data Pasien #".$id,
-                    'content'=>$this->renderAjax('update', [
+                    'title' => "Ubah Data Pasien #" . $id,
+                    'content' => $this->renderAjax('update', [
                         'model' => $model,
                     ]),
-                    'footer'=> Html::button('Tutup',['class'=>'btn btn-default pull-left','data-bs-dismiss'=>"modal"]).
-                            Html::button('Simpan',['class'=>'btn btn-primary','type'=>"submit"])
+                    'footer' => Html::button('Tutup', ['class' => 'btn btn-default pull-left', 'data-bs-dismiss' => "modal"]) .
+                        Html::button('Simpan', ['class' => 'btn btn-primary', 'type' => "submit"])
                 ];
             }
-        }else{
+        } else {
             /*
             * Process for non-ajax request
             */
@@ -204,24 +200,25 @@ class PasienController extends Controller
     }
 
     /**
-    * Delete an existing Pasien model.
-    * For ajax request will return json object
-    * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
-    * @param integer $id
-    * @return mixed
-    */
+     * Delete an existing Pasien model.
+     * For ajax request will return json object
+     * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
     public function actionDelete($id)
     {
         $request = Yii::$app->request;
         $this->findModel($id)->delete();
+        RiwayatMedisPasien::deleteAll(['id_pasien' => $id]);
 
-        if($request->isAjax){
+        if ($request->isAjax) {
             /*
             * Process for ajax request
             */
             Yii::$app->response->format = Response::FORMAT_JSON;
-            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
-        }else{
+            return ['forceClose' => true, 'forceReload' => '#crud-datatable-pjax'];
+        } else {
             /*
             * Process for non-ajax request
             */
@@ -230,28 +227,28 @@ class PasienController extends Controller
     }
 
     /**
-    * Delete multiple existing Pasien model.
-    * For ajax request will return json object
-    * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
-    * @param integer $id
-    * @return mixed
-    */
+     * Delete multiple existing Pasien model.
+     * For ajax request will return json object
+     * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
     public function actionBulkdelete()
     {
         $request = Yii::$app->request;
-        $pks = explode(',', $request->post( 'pks' )); // Array or selected records primary keys
-        foreach ( $pks as $pk ) {
+        $pks = explode(',', $request->post('pks')); // Array or selected records primary keys
+        foreach ($pks as $pk) {
             $model = $this->findModel($pk);
             $model->delete();
         }
 
-        if($request->isAjax){
+        if ($request->isAjax) {
             /*
             * Process for ajax request
             */
             Yii::$app->response->format = Response::FORMAT_JSON;
-            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
-        }else{
+            return ['forceClose' => true, 'forceReload' => '#crud-datatable-pjax'];
+        } else {
             /*
             * Process for non-ajax request
             */
@@ -260,15 +257,15 @@ class PasienController extends Controller
     }
 
     /**
-    * Finds the Pasien model based on its primary key value.
-    * If the model is not found, a 404 HTTP exception will be thrown.
-    * @param integer $id
-    * @return Pasien the loaded model
-    * @throws NotFoundHttpException if the model cannot be found
-    */
+     * Finds the Pasien model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Pasien the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     protected function findModel($id)
     {
-                if (($model = Pasien::findOne($id)) !== null) {
+        if (($model = Pasien::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

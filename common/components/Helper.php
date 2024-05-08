@@ -13,4 +13,13 @@ class Helper extends Component
         }
         return 'Tidak';
     }
+    public function getPostifNegatif($data = null)
+    {
+        if ($data == 0) {
+            return 'Negatif';
+        }else if($data == 1){
+            return '<b style="color:red">Positif</b>';
+        }
+        return null;
+    }
 }

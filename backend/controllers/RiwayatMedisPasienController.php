@@ -63,22 +63,26 @@ class RiwayatMedisPasienController extends Controller
     * @param integer $id
     * @return mixed
     */
-    public function actionView($id)
+    public function actionView($id_pasien)
     {
         $request = Yii::$app->request;
+        $model = RiwayatMedisPasien::findOne(['id_pasien' => $id_pasien]);
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                'title'=> "RiwayatMedisPasien",
+                'title'=> "Riwayat Medis Pasien",
+                'size' => "large",
                 'content'=>$this->renderAjax('view', [
-                    'model' => $this->findModel($id),
+                    'model' => $model,
                 ]),
-                'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-bs-dismiss'=>"modal"]).
-                        Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                'footer'=> Html::a('Ubah Data', ['update', 'id' => $model->id], ['class' => 'btn btn-primary fs-14', 'role' => 'modal-remote']).
+                Html::button('Tutup',['class'=>'btn btn-default pull-left','data-bs-dismiss'=>"modal"])
+                    
+
             ];
         }else{
             return $this->render('view', [
-                'model' => $this->findModel($id),
+                'model' => $model,
             ]);
         }
     }
@@ -89,10 +93,11 @@ class RiwayatMedisPasienController extends Controller
     * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
     * @return mixed
     */
-    public function actionCreate()
+    public function actionCreate($id_pasien)
     {
         $request = Yii::$app->request;
         $model = new RiwayatMedisPasien();
+        $model->id_pasien = $id_pasien;
 
         if($request->isAjax){
             /*
@@ -101,7 +106,7 @@ class RiwayatMedisPasienController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Tambah Data RiwayatMedisPasien",
+                    'title'=> "Tambah Data Riwayat Medis Pasien",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -112,16 +117,15 @@ class RiwayatMedisPasienController extends Controller
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Tambah Data RiwayatMedisPasien",
-                    'content' => '<div class="d-flex flex-column justify-content-center align-items-center mb-5">
-                            <img src="/images/success.gif" >
-                            <span class="fs-14">Berhasil Menambah Data</span>
-                        </div>',
+                    'content' => '
+                            <div class="d-flex justify-content-center mb-3"><img src="/gif/konfirmasisukses.gif" width="150"></div>
+                            <h5 class="text-dark text-center pb-2">Berhasil Tambah data</h5>',
                     'footer'=> Html::button('Tutup',['class'=>'btn btn-default pull-left fs-14','data-bs-dismiss'=>"modal"]).
                             Html::a('Tambah Lagi',['create'],['class'=>'btn btn-primary fs-14','role'=>'modal-remote'])
                 ];
             } else{
                 return [
-                    'title'=> "Tambah Data RiwayatMedisPasien",
+                    'title'=> "Tambah Data Riwayat Medis Pasien",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -162,7 +166,7 @@ class RiwayatMedisPasienController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Ubah Data RiwayatMedisPasien",
+                    'title'=> "Ubah Data Riwayat Medis Pasien",
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -172,10 +176,10 @@ class RiwayatMedisPasienController extends Controller
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "RiwayatMedisPasien #".$id,
-                    'content'=>$this->renderAjax('view', [
-                        'model' => $model,
-                    ]),
+                    'title'=> "Riwayat Medis Pasien #".$id,
+                    'content'=> '
+                            <div class="d-flex justify-content-center mb-3"><img src="/gif/konfirmasisukses.gif" width="150"></div>
+                            <h5 class="text-dark text-center pb-2">Berhasil Ubah data</h5>',
                     'footer'=> Html::button('Tutup',['class'=>'btn btn-default pull-left','data-bs-dismiss'=>"modal"]).
                             Html::a('Ubah',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
                 ];

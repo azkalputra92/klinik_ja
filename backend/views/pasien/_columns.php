@@ -1,4 +1,6 @@
 <?php
+
+use common\models\RiwayatMedisPasien;
 use yii\bootstrap5\Html;
 use yii\helpers\Url;
 
@@ -61,11 +63,12 @@ return [
     [
         'class' => 'kartik\grid\ActionColumn',
         'header' => '',
-        'template' => '{edit} {delete} {detail}',
+        'width' => '300px',
+        'template' => '{rekam_medis}{edit}{delete}',
         'buttons' => [
             "edit" => function ($url, $model, $key) {
                 return Html::a('<span class="material-symbols-outlined align-middle fs-18">edit_square</span>', ['update', 'id' => $model->id], [
-                    'class' => 'btn btn-warning btn-icon waves-effect waves-light',
+                    'class' => 'btn btn-warning btn-icon waves-effect waves-light me-2',
                     'role' => 'modal-remote',
                     'title' => 'Edit',
                     'data-toggle' => 'tooltip'
@@ -73,7 +76,7 @@ return [
             },
             "delete" => function ($url, $model, $key) {
                 return Html::a('<span class="material-symbols-outlined align-middle fs-18">delete</span>', ['delete', 'id' => $model->id], [
-                    'class' => 'btn btn-danger btn-icon waves-effect waves-light',
+                    'class' => 'btn btn-danger btn-icon waves-effect waves-light me-2',
                     'role' => 'modal-remote', 'title' => 'Hapus',
                     'data-confirm' => false, 'data-method' => false, // for overide yii data api
                     'data-request-method' => 'post',
@@ -82,9 +85,17 @@ return [
                     'data-confirm-message' => 'Apakah Anda yakin akan menghapus data ini?'
                     ]);
             },
-            "detail" => function ($url, $model, $key) {
-                return Html::a('<span class="material-symbols-outlined align-middle fs-18">more_vert</span>', ['view', 'id' => $model->id], [
-                    'class' => 'btn btn-info btn-icon waves-effect waves-light',
+            "rekam_medis" => function ($url, $model, $key) {
+                if(RiwayatMedisPasien::findOne(['id_pasien' => $model->id])) {
+                    return Html::a('<span class="material-symbols-outlined align-middle fs-18">more_vert</span>', ['/riwayat-medis-pasien/view', 'id_pasien' => $model->id], [
+                        'class' => 'btn btn-info btn-icon waves-effect waves-light me-2',
+                        'role' => 'modal-remote',
+                        'title' => 'Lihat',
+                        'data-toggle' => 'tooltip'
+                    ]);
+                }
+                return Html::a('<span class="material-symbols-outlined align-middle fs-18">more_vert</span>', ['/riwayat-medis-pasien/create', 'id_pasien' => $model->id], [
+                    'class' => 'btn btn-info btn-icon waves-effect waves-light me-2',
                     'role' => 'modal-remote',
                     'title' => 'Lihat',
                     'data-toggle' => 'tooltip'
