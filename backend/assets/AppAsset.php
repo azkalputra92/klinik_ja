@@ -12,9 +12,10 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/dashforge.css',
-        'css/custome.css',
-        'lib/remixicon/fonts/remixicon.css',
+        'css/style.css',
+        'css/site.css',
+        // 'css/custome.css',
+        // 'lib/remixicon/fonts/remixicon.css',
         'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.css',
     ];
     public $js = [
@@ -25,13 +26,7 @@ class AppAsset extends AssetBundle
         // 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.2.3/js/plugins/sortable.min.js',
         // 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.2.3/themes/fas/theme.min.js'
 
-        'js/hideColumn.js',
-        'js/myJs.js',
-        'lib/bootstrap/js/bootstrap.bundle.min.js',
-        'lib/perfect-scrollbar/perfect-scrollbar.min.js',
-        'lib/feather-icons/feather.min.js',
-        'js/dashforge.js',
-        'js/dashforge.aside.js'
+        'js/main.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

@@ -1,32 +1,47 @@
 <?php
 
-/** @var yii\web\View $this */
-/** @var yii\bootstrap5\ActiveForm $form */
-/** @var \common\models\LoginForm $model */
+/** @var yii\web\View $this */ /** @var yii\bootstrap5\ActiveForm $form */ /** @var \common\models\LoginForm $model */
 
+use backend\assets\AppAsset;
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
 
+AppAsset::register($this);
 $this->title = 'Login';
 ?>
-<div class="site-login">
-    <div class="mt-5 offset-lg-3 col-lg-6">
-        <h1><?= Html::encode($this->title) ?></h1>
+<div class="container">
 
-        <p>Please fill out the following fields to login:</p>
+    <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+                    <div class="card mb-3">
 
-        <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+                        <div class="card-body row g-3 needs-validation">
+                            <div class="pt-4">
+                                <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
+                                <p class="text-center small">Enter your username & password to login</p>
+                            </div>
+                            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+                            <div class="col-12">
+                                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                            </div>
+                            <div class="col-12">
 
-            <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                                <?= $form->field($model, 'password')->passwordInput() ?>
+                            </div>
 
-            <?= $form->field($model, 'password')->passwordInput() ?>
+                            <div class="form-group">
+                                <?= Html::submitButton('Login', ['class' => 'btn btn-primary w-100', 'name' => 'login-button']) ?>
+                            </div>
 
-            <?= $form->field($model, 'rememberMe')->checkbox() ?>
+                            <?php ActiveForm::end(); ?>
+                        </div>
+                    </div>
 
-            <div class="form-group">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary btn-block', 'name' => 'login-button']) ?>
+                </div>
             </div>
+        </div>
 
-        <?php ActiveForm::end(); ?>
-    </div>
+    </section>
 </div>

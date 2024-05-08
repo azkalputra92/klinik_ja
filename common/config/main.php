@@ -28,12 +28,6 @@ return [
                 ],
             ]
         ],
-        'cryptoAes' => [
-            'class' => 'common\components\CryptoAes',
-        ],
-        'cryptoRcFour' => [
-            'class' => 'common\components\CryptoRcFour',
-        ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager', // only support DbManager
         ],
@@ -47,24 +41,28 @@ return [
             'datetimeFormat' => 'php:d-M-Y H:i:s',
             'nullDisplay' => '-'
         ],
+        // 'assetManager' => [
+        //     // 'hashCallback' => function ($path) {
+        //     //     return hash('md4', $path);
+        //     // }
+        //     'bundles' => [
+        //         // 'yii\bootstrap5\BootstrapPluginAsset' => [
+        //         //     'js' => []
+        //         // ],
+        //         // 'yii\web\JqueryAsset' => [
+        //         //     'js'=>[]
+        //         // ],
+        //         'yii\bootstrap5\BootstrapAsset' => [
+        //             'css' => []
+        //         ],
+        //     ],
+        // ],
         'assetManager' => [
-            // 'hashCallback' => function ($path) {
-            //     return hash('md4', $path);
-            // }
-            'bundles' => [
-                // 'yii\bootstrap5\BootstrapPluginAsset' => [
-                //     'js' => []
-                // ],
-                // 'yii\web\JqueryAsset' => [
-                //     'js'=>[]
-                // ],
-                'yii\bootstrap5\BootstrapAsset' => [
-                    'css' => []
-                ],
-            ],
+            'appendTimestamp' => true,
         ],
     ],
     'modules' => [
+        
         'mimin' => [
             'class' => '\hscstudio\mimin\Module',
         ],
@@ -72,7 +70,7 @@ return [
             'class' => 'yii\gii\Module',
             'generators' => [
                 'crud-custom'   => [
-                    'class' => 'common\customgenerator\generator_custom\Generator',
+                    'class' => 'common\generators\Generator',
                 ],
             ],
         ],

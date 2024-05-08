@@ -37,30 +37,14 @@ AppAsset::register($this);
 
     <?php $this->beginBody() ?>
 
-    <header class="navbar navbar-header navbar-header-fixed">
-        <div class="navbar-brand">
-            <a href="../../" class="df-logo"><img src="/img/logo-gunung-sari.png" alt="" width="163"></a>
-        </div><!-- navbar-brand -->
-
-
-       
-    </header>
-
-
+    <?= $this->render('header') ?>
 
     <div class="content-body">
-        <!-- <div class="container pd-x-0"> -->
         <?= $content ?>
-        <!-- </div> -->
-    </div>
     </div>
 
     <?php $this->endBody() ?>
 </body>
-
-<footer class="footer d-flex justify-content-center" style="position: fixed; width: 100%; bottom: 0;">
-    <span>&copy; 2023 Gunung Sari Supermarket Created by Codinglab.id </span>
-</footer>
 
 </html>
 <?php $this->endPage();
