@@ -29,6 +29,28 @@ use yii\behaviors\TimestampBehavior;
  */
 class RiwayatMedisPasien extends \yii\db\ActiveRecord
 {
+    public $prob_positif;
+    public $prob_negatif;
+    public $g1_positif;
+    public $g2_positif;
+    public $g3_positif;
+    public $g4_positif;
+    public $g5_positif;
+    public $g6_positif;
+    public $g7_positif;
+    public $g8_positif;
+    public $g9_positif;
+    public $g10_positif;
+    public $g1_negatif;
+    public $g2_negatif;
+    public $g3_negatif;
+    public $g4_negatif;
+    public $g5_negatif;
+    public $g6_negatif;
+    public $g7_negatif;
+    public $g8_negatif;
+    public $g9_negatif;
+    public $g10_negatif;
     /**
      * {@inheritdoc}
      */
@@ -46,6 +68,10 @@ class RiwayatMedisPasien extends \yii\db\ActiveRecord
             [['id_pasien', 'meriang', 'sakit_kepala', 'batuk', 'diare', 'nyeri_otot', 'mual', 'endemik', 'demam', 'keringat_dingin', 'dehidrasi', 'hasil', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'default', 'value' => null],
             [['id_pasien', 'meriang', 'sakit_kepala', 'batuk', 'diare', 'nyeri_otot', 'mual', 'endemik', 'demam', 'keringat_dingin', 'dehidrasi', 'hasil', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['id_pasien', 'meriang', 'sakit_kepala', 'batuk', 'diare', 'nyeri_otot', 'mual', 'endemik', 'demam', 'keringat_dingin', 'dehidrasi'], 'required'],
+            [[
+                'g1_positif', 'g2_positif', 'g3_positif', 'g4_positif', 'g5_positif', 'g6_positif', 'g7_positif', 'g8_positif', 'g9_positif', 'g10_positif',
+                'g1_negatif', 'g2_negatif', 'g3_negatif', 'g4_negatif', 'g5_negatif', 'g6_negatif', 'g7_negatif', 'g8_negatif', 'g9_negatif', 'g10_negatif',
+            ], 'safe'], // Semua atribut dinyatakan 'safe'
         ];
     }
 

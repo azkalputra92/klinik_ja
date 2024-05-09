@@ -66,19 +66,23 @@ class AnalisisPasienController extends Controller
     public function actionView($id)
     {
         $request = Yii::$app->request;
+        $model = $this->findModel($id);
+        $hasilAnalisis = $model->hasilAnalisis;
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
                 'title'=> "AnalisisPasien",
                 'content'=>$this->renderAjax('view', [
-                    'model' => $this->findModel($id),
+                    'model' => $model,
+                    'hasilAnalisis' => $hasilAnalisis,
                 ]),
                 'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-bs-dismiss'=>"modal"]).
                         Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
             ];
         }else{
             return $this->render('view', [
-                'model' => $this->findModel($id),
+                'model' => $model,
+                'hasilAnalisis' => $hasilAnalisis,
             ]);
         }
     }
@@ -101,7 +105,7 @@ class AnalisisPasienController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if ($model->load($request->post()) && $model->hitungHasil()) {
 
-                $redirect =  Url::base(true) . '/hasil-analisis-pasien/index';
+                $redirect =  Url::base(true) . '/analisis-pasien/view?id=' . $model->id;
                 return $this->asJson([
                     'success' => true,
                     'reset' => true,

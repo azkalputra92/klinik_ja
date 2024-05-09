@@ -152,7 +152,8 @@ return [
     [
         'class' => 'kartik\grid\ActionColumn',
         'header' => '',
-        'template' => '{edit} {delete} {detail}',
+        'width' => '300px',
+        'template' => '{detail}{delete} ',
         'buttons' => [
             "edit" => function ($url, $model, $key) {
                 return Html::a('<span class="material-symbols-outlined align-middle fs-18">edit_square</span>', ['update', 'id' => $model->id], [
@@ -164,7 +165,7 @@ return [
             },
             "delete" => function ($url, $model, $key) {
                 return Html::a('<span class="material-symbols-outlined align-middle fs-18">delete</span>', ['delete', 'id' => $model->id], [
-                    'class' => 'btn btn-danger btn-icon waves-effect waves-light',
+                    'class' => 'btn btn-danger btn-icon waves-effect waves-light me-2',
                     'role' => 'modal-remote', 'title' => 'Hapus',
                     'data-confirm' => false, 'data-method' => false, // for overide yii data api
                     'data-request-method' => 'post',
@@ -175,8 +176,8 @@ return [
             },
             "detail" => function ($url, $model, $key) {
                 return Html::a('<span class="material-symbols-outlined align-middle fs-18">more_vert</span>', ['view', 'id' => $model->id], [
-                    'class' => 'btn btn-info btn-icon waves-effect waves-light',
-                    'role' => 'modal-remote',
+                    'class' => 'btn btn-info btn-icon waves-effect waves-light me-2' ,
+                    'data-pjax' => 0,
                     'title' => 'Lihat',
                     'data-toggle' => 'tooltip'
                 ]);

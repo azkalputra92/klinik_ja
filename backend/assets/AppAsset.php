@@ -17,8 +17,10 @@ class AppAsset extends AssetBundle
         // 'css/custome.css',
         // 'lib/remixicon/fonts/remixicon.css',
         'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.css',
-        'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0',
         'https://fonts.googleapis.com/icon?family=Material+Icons',
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.css',
+        'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0',
+   
 
     ];
     public $js = [
