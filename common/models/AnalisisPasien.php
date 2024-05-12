@@ -50,7 +50,7 @@ class AnalisisPasien extends \yii\db\ActiveRecord
         return [
             [['id_pasien', 'umur_pasien', 'meriang', 'sakit_kepala', 'batuk', 'diare', 'nyeri_otot', 'mual', 'endemik', 'demam', 'keringat_dingin', 'dehidrasi', 'hasil', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'default', 'value' => null],
             [['id_pasien', 'umur_pasien', 'meriang', 'sakit_kepala', 'batuk', 'diare', 'nyeri_otot', 'mual', 'endemik', 'demam', 'keringat_dingin', 'dehidrasi', 'hasil', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['nama_pasien', 'jenis_kelamin','alamat', 'umur_pasien', 'meriang', 'sakit_kepala', 'batuk', 'diare', 'nyeri_otot', 'mual', 'endemik', 'demam', 'keringat_dingin', 'dehidrasi', 'hasil', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'required'],
+            [['nama_pasien', 'jenis_kelamin','alamat', 'umur_pasien', 'meriang', 'sakit_kepala', 'batuk', 'diare', 'nyeri_otot', 'mual', 'endemik', 'demam', 'keringat_dingin', 'dehidrasi'], 'required'],
             [['alamat'], 'string'],
             [['nama_pasien', 'jenis_kelamin'], 'string', 'max' => 255],
         ];
