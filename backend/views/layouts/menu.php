@@ -27,15 +27,15 @@ $this->registerJs("
     ];
 
     $menuItems[] = [
-        'label' => '<i class="bi bi-circle"></i><span>Tambah Data Pasien</span>',
+        'label' => '<i class="bi bi-journal-text"></i><span>Tambah Data Pasien</span>',
         'url' => ['/pasien/create']
     ];
     $menuItems[] = [
-        'label' => '<i class="bi bi-circle"></i><span>Data Rekam Medis</span>',
+        'label' => '<i class="bi bi-layout-text-window-reverse"></i><span>Data Rekam Medis</span>',
         'url' => ['/pasien/index']
     ];
     $menuItems[] = [
-        'label' => '<i class="bi bi-circle"></i><span>Analisis Pasien</span>',
+        'label' => '<i class="bi bi-file-earmark"></i><span>Analisis Pasien</span>',
         'url' => ['/analisis-pasien/index']
     ];
 

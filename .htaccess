@@ -23,6 +23,7 @@ RewriteRule ^fonts/(.*)$ backend/web/fonts/$1 [L]
 RewriteRule ^js/(.*)$ backend/web/js/$1 [L]
 RewriteRule ^less/(.*)$ backend/web/less/$1 [L]
 RewriteRule ^images/(.*)$ backend/web/images/$1 [L]
+RewriteRule ^vendor/(.*)$ backend/web/vendor/$1 [L]
 RewriteRule ^gif/(.*)$ backend/web/gif/$1 [L]
 RewriteRule ^img/(.*)$ backend/web/img/$1 [L]
 RewriteRule ^upload/(.*)$ backend/web/upload/$1 [L]
@@ -30,7 +31,7 @@ RewriteRule ^assets/(.*)$ backend/web/assets/$1 [L]
 RewriteRule ^common/(.*)$ common/$1 [L]
 
 # ========Jika tidak memenuhi kondisi di atas, maka arahkan ke index.php======== #
-RewriteCond %{REQUEST_URI} !^/(dashboard|backend)/web/(css|less|js|images|img|assets|upload|fonts|img|gif)/
+RewriteCond %{REQUEST_URI} !^/(dashboard|backend)/web/(css|less|js|images|img|assets|upload|fonts|img|gif|vendor)/
 RewriteCond %{REQUEST_URI} !index.php
 RewriteCond %{REQUEST_FILENAME} !-f [OR]
 RewriteCond %{REQUEST_FILENAME} !-d

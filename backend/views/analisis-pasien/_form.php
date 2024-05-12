@@ -51,7 +51,7 @@ $this->registerJsFile(
             <?=
             $form->field($model, 'jenis_kelamin')->widget(Select2::classname(), [
                 'bsVersion' => '5.x',
-                'data' => ['L' => 'Laki-Laki', 'P' => 'Perempuan'],
+                'data' => ['Laki-Laki' => 'Laki-Laki', 'Perempuan' => 'Perempuan'],
                 'options' => ['placeholder' => 'Jenis Kelamin', 'class' => 'me-auto'],
                 'pluginOptions' => [
                     'allowClear' => true,
