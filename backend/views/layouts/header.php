@@ -10,7 +10,10 @@ use yii\helpers\Url;
             <img src="/img/logo.png" alt="">
             <span class="d-none d-lg-block">Naive Bayes</span>
         </a>
-        <i class="bi bi-list toggle-sidebar-btn"></i>
+        <?php if (!Yii::$app->user->isGuest) : ?>
+
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+        <?php endif ?>
     </div><!-- End Logo -->
     <?php if (!Yii::$app->user->isGuest) : ?>
         <nav class="header-nav ms-auto">
