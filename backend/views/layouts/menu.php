@@ -1,6 +1,9 @@
 <?php
 
+use yii\bootstrap5\Html;
+use yii\helpers\Url;
 use yii\widgets\Menu;
+
 $this->registerJs("
   $(document).ready(function() {
        $('li.nav-item.active').each(function(){
@@ -37,7 +40,9 @@ $this->registerJs("
     ];
     $menuItems[] = [
         'label' => '<i class="bi bi-circle"></i><span>Keluar</span>',
-        'url' => ['site/logout'],
+        'url' => ['/site/logout'],
+        'options' => ['data-method' => 'post'],
+
         // 'options' => ['class' => 'nav-link collapsed']
     ];
 
@@ -57,4 +62,9 @@ $this->registerJs("
 
     ]);
     ?>
+    <ul class="nav nav-aside mg-b-0">
+        <li class="nav-item"><a href="/admin/admin-account/edit-profile" class="nav-link"><i data-feather="edit"></i> <span>Edit Profile</span></a></li>
+        <li class="nav-item"><a href="/admin/admin-account/change-password" class="nav-link"><i data-feather="key"></i> <span>Change Password</span></a></li>
+        <li class="nav-item"><a href="/site/logout" data-method="POST" class="nav-link"><i data-feather="log-out"></i> <span>Sign Out</span></a></li>
+    </ul>
 </aside><!-- End Sidebar-->
