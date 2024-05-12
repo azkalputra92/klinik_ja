@@ -23,7 +23,7 @@ $this->registerJs("
 
     $menuItems[] = [
         'label' => '<i class="bi bi-grid"></i><span>Menu</span>',
-        'options' => ['class' => 'nav-link collapsed']
+        'options' => ['class' => 'nav-link collapsed disabled']
     ];
 
     $menuItems[] = [

@@ -6,7 +6,7 @@ use yii\helpers\Url;
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-        <a href="/site/index" class="logo d-flex align-items-center">
+        <a href="/site/index" class="logo d-flex align-items-center" style="text-decoration: none;">
             <img src="/img/logo.png" alt="">
             <span class="d-none d-lg-block">Naive Bayes</span>
         </a>
