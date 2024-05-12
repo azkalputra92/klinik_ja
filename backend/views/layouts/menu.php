@@ -38,13 +38,6 @@ $this->registerJs("
         'label' => '<i class="bi bi-circle"></i><span>Analisis Pasien</span>',
         'url' => ['/analisis-pasien/index']
     ];
-    $menuItems[] = [
-        'label' => '<i class="bi bi-circle"></i><span>Keluar</span>',
-        'url' => ['/site/logout'],
-        'options' => ['data-method' => 'post'],
-
-        // 'options' => ['class' => 'nav-link collapsed']
-    ];
 
     echo Menu::widget([
         'items' => $menuItems,

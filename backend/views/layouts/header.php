@@ -18,7 +18,7 @@ use yii\helpers\Url;
             <li class="nav-item dropdown pe-3">
                 <a class="dropdown-item d-flex align-items-center" href="/site/logout" data-method="POST">
                     <i class="bi bi-box-arrow-right"></i>
-                    <span>Logout</span>
+                    <span>Keluar</span>
                 </a>
             </li>
 
