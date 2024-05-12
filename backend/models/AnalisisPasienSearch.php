@@ -45,11 +45,12 @@ class AnalisisPasienSearch extends AnalisisPasien
     {
         $query = AnalisisPasien::find();
 
+        $this->load($params);
+
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+            'query' => $query,'sort' => ['defaultOrder' => ['id' => SORT_DESC]],
         ]);
 
-        $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
@@ -62,27 +63,7 @@ class AnalisisPasienSearch extends AnalisisPasien
         }
 
         $query->andFilterWhere(['or',
-            ['id' => $cari_angka],
-            ['id_pasien' => $cari_angka],
-            ['umur_pasien' => $cari_angka],
-            ['meriang' => $cari_angka],
-            ['sakit_kepala' => $cari_angka],
-            ['batuk' => $cari_angka],
-            ['diare' => $cari_angka],
-            ['nyeri_otot' => $cari_angka],
-            ['mual' => $cari_angka],
-            ['endemik' => $cari_angka],
-            ['demam' => $cari_angka],
-            ['keringat_dingin' => $cari_angka],
-            ['dehidrasi' => $cari_angka],
-            ['hasil' => $cari_angka],
-            ['created_at' => $cari_angka],
-            ['updated_at' => $cari_angka],
-            ['created_by' => $cari_angka],
-            ['updated_by' => $cari_angka],
-            ['ilike', 'nama_pasien', $this->cari],
-            ['ilike', 'jenis_kelamin', $this->cari],
-            ['ilike', 'alamat', $this->cari],
+            ['like', 'nama_pasien', $this->cari],
         ]);
         // $query->andFilterWhere(['ilike', '', $this->cari]);
         return $dataProvider;

@@ -65,7 +65,7 @@ class PasienSearch extends Pasien
 
         $query->andFilterWhere(['or',
             // ['id' => $cari_angka],
-            ['ilike', 'nama_pasien', $this->cari],
+            ['like', 'nama_pasien', $this->cari],
             // ['ilike', 'jenis_kelamin', $this->cari],
         ]);
         // $query->andFilterWhere(['ilike', '', $this->cari]);
