@@ -26,10 +26,11 @@ return [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'harga',
-        'format' => 'currency',
-        //'vAlign' => 'middle',
         'contentOptions' => ['style'=>'vertical-align: top;'],
         'encodeLabel' => false,
+        'value'=> function($model){
+            return  number_format($model->harga);
+        }
     ],
 
 [

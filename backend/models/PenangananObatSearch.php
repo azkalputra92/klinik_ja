@@ -76,10 +76,7 @@ class PenangananObatSearch extends PenangananObat
             ['jumlah' => $cari_angka],
             ['harga' => $cari_angka],
             ['harga_total' => $cari_angka],
-            ['created_at' => $cari_angka],
-            ['updated_at' => $cari_angka],
-            ['created_by' => $cari_angka],
-            ['updated_by' => $cari_angka],
+           
             
         ]);
         // $query->andFilterWhere(['like', '', $this->cari]);

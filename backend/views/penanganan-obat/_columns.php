@@ -35,7 +35,11 @@ return [
         //'vAlign' => 'middle',
         'contentOptions' => ['style'=>'vertical-align: top;'],
         'encodeLabel' => false,
-        'format' => 'currency',
+        'format' => 'raw',
+        'encodeLabel' => false,
+        'value'=> function($model){
+            return  number_format($model->harga);
+        }
 
     ],
     [
@@ -43,7 +47,9 @@ return [
         'label'=> 'Harga Total',
         'attribute'=>'harga_total',
         'encodeLabel' => false,
-        'format' => 'currency',
+        'value'=> function($model){
+            return  number_format($model->harga);
+        }
 
     ],
     // [

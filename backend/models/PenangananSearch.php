@@ -72,10 +72,7 @@ class PenangananSearch extends Penanganan
             ['id' => $cari_angka],
             ['id_pasien' => $cari_angka],
             ['tanggal' => $cari_angka],
-            ['created_at' => $cari_angka],
-            ['updated_at' => $cari_angka],
-            ['created_by' => $cari_angka],
-            ['updated_by' => $cari_angka],
+           
             ['like', 'status', $this->cari],
         ]);
         // $query->andFilterWhere(['like', '', $this->cari]);

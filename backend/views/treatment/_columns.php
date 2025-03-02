@@ -43,9 +43,12 @@ return [
         'class'=>'\kartik\grid\DataColumn',
         'label'=> 'Harga',
         'attribute'=>'harga',
-        'format' => 'currency',
+        'format' => 'raw',
         'vAlign' => 'middle',
         'encodeLabel' => false,
+        'value'=> function($model){
+            return  number_format($model->harga);
+        }
     ],
     [
         'class'=>'\kartik\grid\DataColumn',

@@ -72,13 +72,8 @@ class ObatSearch extends Obat
         $query->andFilterWhere(['or',
             ['id' => $cari_angka],
             ['harga' => $cari_angka],
-            ['created_at' => $cari_angka],
-            ['updated_at' => $cari_angka],
-            ['created_by' => $cari_angka],
-            ['updated_by' => $cari_angka],
+           
             ['like', 'nama', $this->cari],
-            ['like', 'prosedur', $this->cari],
-            ['like', 'durasi', $this->cari],
             ['like', 'keterangan', $this->cari],
         ]);
         // $query->andFilterWhere(['like', '', $this->cari]);

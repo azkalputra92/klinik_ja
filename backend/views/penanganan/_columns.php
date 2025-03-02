@@ -43,8 +43,11 @@ return [
         'class'=>'\kartik\grid\DataColumn',
         // 'label'=> 'Status',
         'attribute'=>'harga_total',
-        'format' => 'currency',
+        'format' => 'raw',
         'encodeLabel' => false,
+        'value'=> function($model){
+            return  number_format($model->harga_total);
+        }
     ],
 
     [
