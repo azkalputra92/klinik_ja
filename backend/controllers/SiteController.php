@@ -2,13 +2,10 @@
 
 namespace backend\controllers;
 
-use backend\models\GantiPassword;
 use common\models\LoginForm;
 use Yii;
-use yii\bootstrap5\Html;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\Response;
 
@@ -31,18 +28,18 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index' , 'ubah-password'],
+                        'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
                 ],
             ],
-            'verbs' => [
-                'class' => VerbFilter::class,
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
+            // 'verbs' => [
+            //     'class' => VerbFilter::class,
+            //     'actions' => [
+            //         'logout' => ['post'],
+            //     ],
+            // ],
         ];
     }
 
@@ -54,10 +51,16 @@ class SiteController extends Controller
         return [
             'error' => [
                 'class' => \yii\web\ErrorAction::class,
+                'layout' => 'blank',
             ],
         ];
     }
-
+    public function beforeAction($action)
+    {            
+        $this->enableCsrfValidation = false;
+    
+        return parent::beforeAction($action);
+    }
     /**
      * Displays homepage.
      *
@@ -65,7 +68,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        if (!Yii::$app->user->isGuest) {
+            return $this->redirect('/admin/penanganan'); 
+            // return $this->render('index');
+        }
+        return $this->redirect('login'); 
     }
 
     /**
@@ -76,18 +83,15 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+            return $this->redirect('/admin/penanganan'); 
         }
 
         $this->layout = 'blank';
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->redirect('/admin/penanganan'); 
         }
-
-        $model->password = '';
-
         return $this->render('login', [
             'model' => $model,
         ]);
@@ -103,47 +107,5 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
-    }
-    public function actionUbahPassword($id)
-    {
-        $request = Yii::$app->request;
-        $model = new GantiPassword();
-
-        $request = Yii::$app->request;
-        if ($request->isAjax) {
-            /*
-            * Process for ajax request
-            */
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            if ($request->isGet) {
-                return [
-                    'title' => "Ubah Password",
-                    'content' => $this->renderAjax('ubah-password', [
-                        'model' => $model,
-                    ]),
-                    'footer' => Html::button('Tutup', ['class' => 'btn btn-default pull-left fs-14', 'data-bs-dismiss' => "modal"]) .
-                    Html::button('Simpan', ['class' => 'btn btn-primary fs-14', 'type' => "submit"])
-                ];
-            } else if ($model->load($request->post()) && $model->gantiPassword($id)) {
-                return [
-                    'forceReload' => '#crud-datatable-pjax',
-                    'title' => "Ubah Password",
-                    'content' => '<div class="d-flex flex-column justify-content-center align-items-center mb-5">
-                            <img src="/images/success.gif" >
-                            <span class="fs-14">Berhasil Menambah Data</span>
-                        </div>',
-                    'footer' => Html::button('Tutup', ['class' => 'btn btn-default pull-left fs-14', 'data-bs-dismiss' => "modal"])
-                ];
-            } else {
-                return [
-                    'title' => "Ubah Password",
-                    'content' => $this->renderAjax('ubah-password', [
-                        'model' => $model,
-                    ]),
-                    'footer' => Html::button('Tutup', ['class' => 'btn btn-default pull-left fs-14', 'data-bs-dismiss' => "modal"]) .
-                    Html::button('Simpan', ['class' => 'btn btn-primary fs-14', 'type' => "submit"])
-                ];
-            }
-        } 
     }
 }

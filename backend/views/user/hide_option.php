@@ -1,0 +1,31 @@
+<?php
+
+?>
+<div class="dropdown">
+    <button class="btn border shadow-sm dropdown-toggle" style="padding: 6px;" onclick="showDropdown()" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="dropdown-option">
+        <span><i data-feather="settings" width="16" height="16"></i></span>
+    </button>
+    <ul class="dropdown-menu">
+        
+        <li><span class="dropdown-item hidecolumn" data-column="1">
+            <input type="checkbox" id = "1"> <label for = "1">Username</label>
+        </span></li>
+        <li><span class="dropdown-item hidecolumn" data-column="2">
+            <input type="checkbox" id = "2"> <label for = "2">Auth Key</label>
+        </span></li>
+        <li><span class="dropdown-item hidecolumn" data-column="3">
+            <input type="checkbox" id = "3"> <label for = "3">Password Hash</label>
+        </span></li>
+        <li><span class="dropdown-item hidecolumn" data-column="4">
+            <input type="checkbox" id = "4"> <label for = "4">Password Reset Token</label>
+        </span></li>
+        <li><span class="dropdown-item hidecolumn" data-column="5">
+            <input type="checkbox" id = "5"> <label for = "5">Email</label>
+        </span></li>
+        <li><span class="dropdown-item hidecolumn" data-column="6">
+            <input type="checkbox" id = "6"> <label for = "6">Status</label>
+        </span></li>
+        <li><span class="dropdown-item hidecolumn" data-column="7">
+            <input type="checkbox" id = "7"> <label for = "7">Verification Token</label>
+        </span></li>    </ul>
+</div>

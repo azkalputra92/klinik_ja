@@ -13,15 +13,19 @@ use common\models\Pasien;
 class PasienSearch extends Pasien
 {
     public $cari;
+    public $rowdata;
+    public $tanggal_dari;
+    public $tanggal_sampai;
+    public $status_aktif;
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'umur_pasien', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['nama_pasien', 'jenis_kelamin'], 'safe'],
-            ['cari', 'safe'],
+            [['id'], 'integer'],
+            [['nama', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'alamat', 'nomor_telepon', 'email', 'instagram', 'emergency_nama', 'emergency_nomor_telepon', 'info_ja', 'riwayat_perawatan', 'riwayat_penyakit', 'riwayat_obat', 'riwayat_alergi', 'keadaan_pasien', 'status'], 'safe'],
+            [['cari','rowdata','tanggal_dari', 'tanggal_sampai'], 'safe'],
         ];
     }
 
@@ -44,12 +48,13 @@ class PasienSearch extends Pasien
     public function search($params)
     {
         $query = Pasien::find();
-
-        $this->load($params);
         
+        $this->load($params);
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => ['defaultOrder' => ['id' => SORT_DESC]],
+            'pagination' => [
+                'pageSize' => (!empty($this->rowdata)) ? $this->rowdata : 10,
+            ],
         ]);
 
 
@@ -64,11 +69,28 @@ class PasienSearch extends Pasien
         }
 
         $query->andFilterWhere(['or',
-            // ['id' => $cari_angka],
-            ['like', 'nama_pasien', $this->cari],
-            // ['ilike', 'jenis_kelamin', $this->cari],
+            ['id' => $cari_angka],
+            ['tanggal_lahir' => $cari_angka],
+            ['ilike', 'nama', $this->cari],
+            ['ilike', 'jenis_kelamin', $this->cari],
+            ['ilike', 'tempat_lahir', $this->cari],
+            ['ilike', 'alamat', $this->cari],
+            ['ilike', 'nomor_telepon', $this->cari],
+            ['ilike', 'email', $this->cari],
+            ['ilike', 'instagram', $this->cari],
+            ['ilike', 'emergency_nama', $this->cari],
+            ['ilike', 'emergency_nomor_telepon', $this->cari],
+            ['ilike', 'info_ja', $this->cari],
+            ['ilike', 'riwayat_perawatan', $this->cari],
+            ['ilike', 'riwayat_penyakit', $this->cari],
+            ['ilike', 'riwayat_obat', $this->cari],
+            ['ilike', 'riwayat_alergi', $this->cari],
+            ['ilike', 'keadaan_pasien', $this->cari],
+            ['ilike', 'status', $this->cari],
         ]);
         // $query->andFilterWhere(['ilike', '', $this->cari]);
+        $query->andFilterWhere(['between', 'tanggal', $this->tanggal_dari, $this->tanggal_sampai]);
+        $query->andFilterWhere(['status_aktif' => $this->status_aktif]);
         return $dataProvider;
     }
 }

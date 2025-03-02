@@ -3,20 +3,28 @@
 namespace common\models;
 
 use Yii;
-use yii\behaviors\BlameableBehavior;
-use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "pasien".
  *
  * @property int $id
- * @property string|null $nama_pasien
- * @property int|null $umur_pasien
+ * @property string|null $nama
  * @property string|null $jenis_kelamin
- * @property int|null $created_at
- * @property int|null $updated_at
- * @property int|null $created_by
- * @property int|null $updated_by
+ * @property string|null $tempat_lahir
+ * @property string|null $tanggal_lahir
+ * @property string|null $alamat
+ * @property string|null $nomor_telepon
+ * @property string|null $email
+ * @property string|null $instagram
+ * @property string|null $emergency_nama
+ * @property string|null $emergency_nomor_telepon
+ * @property string|null $info_ja
+ * @property string|null $riwayat_perawatan
+ * @property string|null $riwayat_penyakit
+ * @property string|null $riwayat_obat
+ * @property string|null $riwayat_alergi
+ * @property string|null $keadaan_pasien
+ * @property string|null $status
  */
 class Pasien extends \yii\db\ActiveRecord
 {
@@ -34,12 +42,9 @@ class Pasien extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['umur_pasien', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'default', 'value' => null],
-            [['umur_pasien', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['nama_pasien', 'jenis_kelamin', 'umur_pasien'], 'required'],
-            [['nama_pasien', 'jenis_kelamin'], 'string', 'max' => 255],
-            [['nama_pasien','umur_pasien', 'jenis_kelamin'], 'required'],
-            [['alamat'], 'safe'],
+            [['tempat_lahir', 'alamat', 'info_ja', 'riwayat_perawatan', 'riwayat_penyakit', 'riwayat_obat', 'riwayat_alergi', 'keadaan_pasien'], 'string'],
+            [['tanggal_lahir'], 'safe'],
+            [['nama', 'jenis_kelamin', 'nomor_telepon', 'email', 'instagram', 'emergency_nama', 'emergency_nomor_telepon', 'status'], 'string', 'max' => 255],
         ];
     }
 
@@ -50,20 +55,23 @@ class Pasien extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'nama_pasien' => 'Nama Pasien',
-            'umur_pasien' => 'Umur Pasien',
+            'nama' => 'Nama',
             'jenis_kelamin' => 'Jenis Kelamin',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-            'created_by' => 'Created By',
-            'updated_by' => 'Updated By',
-        ];
-    }
-    public function behaviors()
-    {
-        return [
-            BlameableBehavior::class,
-            TimestampBehavior::class,
+            'tempat_lahir' => 'Tempat Lahir',
+            'tanggal_lahir' => 'Tanggal Lahir',
+            'alamat' => 'Alamat',
+            'nomor_telepon' => 'Nomor Telepon',
+            'email' => 'Email',
+            'instagram' => 'Instagram',
+            'emergency_nama' => 'Emergency Nama',
+            'emergency_nomor_telepon' => 'Emergency Nomor Telepon',
+            'info_ja' => 'Info Ja',
+            'riwayat_perawatan' => 'Riwayat Perawatan',
+            'riwayat_penyakit' => 'Riwayat Penyakit',
+            'riwayat_obat' => 'Riwayat Obat',
+            'riwayat_alergi' => 'Riwayat Alergi',
+            'keadaan_pasien' => 'Keadaan Pasien',
+            'status' => 'Status',
         ];
     }
 }

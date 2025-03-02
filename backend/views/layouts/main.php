@@ -5,7 +5,7 @@
 
 use backend\assets\AppAsset;
 use common\widgets\Alert;
-use yii\bootstrap5\Breadcrumbs;
+use yii\widgets\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
@@ -14,39 +14,35 @@ AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>" class="h-100">
+<html lang="id" data-bs-theme="light">
 
 <head>
-    <meta charset="<?= Yii::$app->charset ?>">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-    <?php $this->registerCsrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-
-    <?php $this->head() ?>
+	<meta charset="<?= Yii::$app->charset ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<?php $this->registerCsrfMetaTags() ?>
+	<title><?= Html::encode($this->title) ?></title>
+	<?php $this->head() ?>
 </head>
 
-
-<body class="page-profile">
-    <?php $this->beginBody() ?>
-    <!-- Page Header Start-->
-    <?= $this->render('header') ?>
-    <!-- Page Header Ends -->
-
-    <?php
-    // require 'menu.php';
-    echo $this->render('menu');
-    ?>
-    <!-- close menus -->
-    <main id="main" class="main">
-        <?= $content ?>
-    </main>
-
-    <?php $this->endBody() ?>
+<body id="kt_app_body" data-kt-app-header-fixed="true" data-kt-app-header-fixed-mobile="true" data-kt-app-sidebar-enabled="true" data-kt-app-sidebar-fixed="true" data-kt-app-sidebar-push-header="true" data-kt-app-sidebar-push-toolbar="true" data-kt-app-sidebar-push-footer="true" data-kt-app-sidebar-stacked="true" data-kt-app-sidebar-secondary-enabled="true" data-kt-app-toolbar-enabled="true" class="app-default">
+	<?php $this->beginBody() ?>
+	<div class="d-flex flex-column flex-root app-root" id="kt_app_root">
+		<div class="app-page flex-column flex-column-fluid" id="kt_app_page">
+			<?= $this->render('header'); ?>
+			<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper" style="margin-top: 0px;">
+				<?= $this->render('sidebar'); ?>
+				<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+					<!--begin::Content wrapper-->
+					<div class="d-flex flex-column flex-column-fluid" >
+						<?= $content ?>
+					</div>
+					<!--end::Content wrapper-->
+					<?= $this->render('footer') ?>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php $this->endBody() ?>
 </body>
 
 </html>

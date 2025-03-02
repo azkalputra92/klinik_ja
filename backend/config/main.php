@@ -18,6 +18,7 @@ return [
             'csrfParam' => '_csrf-backend',
             'class' => 'common\components\Request',
             'web' => '/backend/web',
+            'adminUrl' => '/admin' // untuk adminUrl harap di perhatikan biasanya ini di aktifkan selain daripada app landing
         ],
         'user' => [
             'identityClass' => 'common\models\User',

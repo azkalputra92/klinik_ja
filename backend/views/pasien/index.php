@@ -11,100 +11,82 @@ use yii\bootstrap5\ActiveForm;
 /* @var $searchModel backend\models\PasienSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Pasien';
+$this->title = "Pasien";
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['judulHalaman'] = $this->title;
+$this->params['subJudul'] = "";
+
 
 CrudAsset::register($this);
-
+$appendBtn = '<span class="ic-search"><i data-feather="search" width="16" height="16"></i></span>';
 $this->registerJs("$('.modal-dialog').addClass('modal-dialog-centered')");
-
 ?>
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <?=GridView::widget(
+    [
+    'id'=> 'crud-datatable',
+    'dataProvider' => $dataProvider,
+    'filterModel' => null,
+    'pjax'=> true,
+    // 'pjaxSettings' => [
+    // 'options' => [
+    // 'enablePushState' => false,
+    // ]
+    //],
+    'export'=> false,
+    'summary'=> "Menampilkan <b>{begin}</b> - <b>{end}</b> dari <b>{totalCount}</b> hasil",
+    'columns' => require(__DIR__.'/_columns.php'),
+    'toolbar'=> [
+    [
+    'content' =>'{export}'
+    ],
+    ],
+    'bordered' => false,
+    'striped' => true,
+    'condensed' => true,
+    'responsive' => true,
+    'responsiveWrap' => false,
+    'panelHeadingTemplate' => '<div class="d-flex justify-content-between w-100">
+        <div class="d-flex align-items-center">
+            <h5 class="fw-normal mb-2 mb-md-0 fw-500 fs-16">Semua Pasien</h5>
+        </div>
 
-<div class="pasien-index">
-    <div class="card">
-        <div class="card-header">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <h5 class="m-0 text-dark">Pasien</h5>
-                </div>
-                <div>
-                    <?=
-                        Html::a(
-                            '<span class="material-symbols-outlined align-middle">add_circle</span> Tambah Data',
-                            ['create'],
-                            ['role' => 'modal-remote', 'title' => 'Tambah Pasien', 'class' => 'btn btn-outline-primary btn-border']
-                        )
-                    ?>
-                </div>
-            </div>
+        <div class="d-flex justify-content-start justify-content-md-end align-items-center">'.
+            Html::a(
+            'Tambah Pasien',
+            ['create'],
+            ['role' => 'modal-remote', 'title' => 'Tambah Pasien', 'class' => 'btn btn btn-primary', 'style' => 'width: fit-content;']
+            ).'
         </div>
-        <div id="ajaxCrudDatatable" class="card-body">
-            <?php $form = ActiveForm::begin(['method' => 'get', 'action'=>'index']); ?>
-            <div class="row mb-3">
-                <div class="col">
-                    <div class="row row-cols-1 field-search">
-                        <div class="col">
-                            <?=
-                                $form->field($searchModel, 'cari')->textInput(
-                                    [
-                                        'class' => 'form-control',
-                                        'placeholder' => 'Pencarian...',    
-                                    ]
-                                )
-                                ->label(false)
-                            ?>
-                        </div>
-                    </div> 
-                </div>
-                <div class="col-auto ms-auto">
-                    <div class="form-group">
-                        <?=
-                            Html::submitButton(
-                                '<span class="material-symbols-outlined align-middle">search</span>', 
-                                [
-                                    'class' => 'btn btn-primary rounded btn-search',
-                                    'data-pjax' => true
-                                ]
-                            ) 
-                        ?>
-                    </div>
-                </div>
-            </div>
-            <?php ActiveForm::end(); ?>
-            <?=GridView::widget([
-                'id'=> 'crud-datatable',
-                'dataProvider' => $dataProvider,
-                'filterModel' => null,
-                'pjax'=> true,
-                'export'=> false,
-                'summary'=> "Menampilkan <b>{begin}</b> - <b>{end}</b> dari <b>{totalCount}</b> hasil",
-                'columns' => require(__DIR__.'/_columns.php'),
-                'toolbar'=> [
-                    [
-                        'content' =>'{export}'
-                    ],
-                ],
-                'striped' => false,
-                'condensed' => true,
-                'responsive' => true,
-                'panel' => [
-                    'type' => '',
-                    'heading' => false,
-                    'before' => false,
-                    'after' => false,
-                ],
-                'panelFooterTemplate'=> '<div class="d-flex justify-content-between">{summary}{pager}</div>',
-            ])?>
-        </div>
-    </div>
+    </div>',
+    'panel' => [
+    'type' => '',
+    'heading' => true,
+    'before' => false,
+    'after' => false,
+    'footer' => true,
+    ],
+    'panelTemplate' => $this->render('panelTemplate',['searchModel'=>$searchModel, 'isExtraFilter' => false, 'isRangeDateFilter' => false, 'isStatusFilter' => false]),
+    'panelFooterTemplate'=> '<div class="d-flex justify-content-between align-items-center">{summary} {pager}</div>',
+    'pager' => [
+    'prevPageLabel' => '<i class="icon fs-16">keyboard_double_arrow_left</i>',
+    'maxButtonCount' => 5,
+    'nextPageLabel' => '<i class="icon fs-16">keyboard_double_arrow_right</i>',
+    ],
+    ])
+    ?>
 </div>
-
-<?php Modal::begin([
-        "options" => [
-            "id"=>"ajaxCrudModal",
-            "tabindex" => false // important for Select2 to work properly
-        ],
-        "id"=>"ajaxCrudModal",
-        "footer"=>"",// always need it for jquery plugin
-    ])?>
-<?php Modal::end(); ?>
+<?php
+$request = Yii::$app->request;
+if (!$request->isAjax) {
+ Modal::begin([
+    "size" => "modal-lg",
+    "options" => [
+        "id" => "ajaxCrudModal",
+        "tabindex" => false // important for Select2 to work properly
+    ],
+    "footer" => "", // always need it for jquery plugin
+]) ?>
+<?php Modal::end(); 
+}
+?>

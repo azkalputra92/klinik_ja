@@ -1,39 +1,44 @@
 Options +FollowSymlinks
 RewriteEngine On
 
-
-# untuk backend
-# RewriteCond %{REQUEST_URI} ^/(admin)
-# RewriteRule ^admin/css/(.*)$ backend/web/css/$1 [L]
-# RewriteRule ^admin/js/(.*)$ backend/web/js/$1 [L]
-# RewriteRule ^admin/fonts/(.*)$ backend/web/fonts/$1 [L]
-# RewriteRule ^admin/img/(.*)$ backend/web/img/$1 [L]
-# RewriteRule ^admin/assets/(.*)$ backend/web/assets/$1 [L]
-# # ========Jika tidak memenuhi kondisi di atas, maka arahkan ke index.php======== #
-# RewriteCond %{REQUEST_URI} !^/admin/web/(css|assets|js|fonts|img)/
-# RewriteCond %{REQUEST_URI} ^/(admin)
-# RewriteRule ^.*$ backend/web/index.php [L]
-# ============================================================================== #
-# ============================================================================== #
+#---- backend ----#
+RewriteCond %{REQUEST_URI} ^/(admin) 
+RewriteRule ^admin/assets/(.*)$ backend/web/assets/$1 [L]
+RewriteRule ^admin/css/(.*)$ backend/web/css/$1 [L]
+RewriteRule ^admin/fonts/(.*)$ backend/web/fonts/$1 [L]
+RewriteRule ^admin/images/(.*)$ backend/web/images/$1 [L]
+RewriteRule ^admin/js/(.*)$ backend/web/js/$1 [L]
+RewriteCond %{REQUEST_URI} !^/backend/web/(assets|css|fonts|images|js)/ 
+RewriteCond %{REQUEST_URI} ^/(admin)  
+RewriteRule ^.*$ backend/web/index.php [L]
+#---- end of backend ----#
 
 
-# ============================================================================== #
-RewriteRule ^css/(.*)$ backend/web/css/$1 [L]
-RewriteRule ^fonts/(.*)$ backend/web/fonts/$1 [L]
-RewriteRule ^js/(.*)$ backend/web/js/$1 [L]
-RewriteRule ^less/(.*)$ backend/web/less/$1 [L]
-RewriteRule ^images/(.*)$ backend/web/images/$1 [L]
-RewriteRule ^vendor/(.*)$ backend/web/vendor/$1 [L]
-RewriteRule ^gif/(.*)$ backend/web/gif/$1 [L]
-RewriteRule ^img/(.*)$ backend/web/img/$1 [L]
-RewriteRule ^upload/(.*)$ backend/web/upload/$1 [L]
+#---- frontend ----#
+# RewriteCond %{REQUEST_URI} ^/() 
+RewriteRule ^frontend/assets/(.*)$ frontend/web/assets/$1 [L]
+RewriteRule ^frontend/css/(.*)$ frontend/web/css/$1 [L]
+RewriteRule ^frontend/fonts/(.*)$ frontend/web/fonts/$1 [L]
+RewriteRule ^frontend/images/(.*)$ frontend/web/images/$1 [L]
+RewriteRule ^frontend/js/(.*)$ frontend/web/js/$1 [L]
+RewriteCond %{REQUEST_URI} !^/frontend/web/(assets|css|fonts|images|js)/ 
+RewriteCond %{REQUEST_URI} ^/(frontend)  
+RewriteRule ^.*$ frontend/web/index.php [L]
+#---- end of frontend ----#
+
+# #frontend
+# RewriteCond %{REQUEST_URI} ^/(assets|css)  
 RewriteRule ^assets/(.*)$ backend/web/assets/$1 [L]
-RewriteRule ^common/(.*)$ common/$1 [L]
+RewriteRule ^css/(.*)$ frontend/web/css/$1 [L]
+RewriteRule ^fonts/(.*)$ frontend/web/fonts/$1 [L]
+RewriteRule ^images/(.*)$ frontend/web/images/$1 [L]
+RewriteRule ^js/(.*)$ frontend/web/js/$1 [L]
 
-# ========Jika tidak memenuhi kondisi di atas, maka arahkan ke index.php======== #
-RewriteCond %{REQUEST_URI} !^/(dashboard|backend)/web/(css|less|js|images|img|assets|upload|fonts|img|gif|vendor)/
+
+#---- all ----#
+RewriteCond %{REQUEST_URI} !^/(frontend|backend)/web/(assets|css|fonts|images|js)/  
 RewriteCond %{REQUEST_URI} !index.php
 RewriteCond %{REQUEST_FILENAME} !-f [OR]
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^.*$ backend/web/index.php
-# ============================================================================== #
+RewriteRule ^.*$  frontend/web/index.php
+
