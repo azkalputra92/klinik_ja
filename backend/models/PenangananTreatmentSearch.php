@@ -74,7 +74,7 @@ class PenangananTreatmentSearch extends PenangananTreatment
             ['id_treatment' => $cari_angka],
             
         ]);
-        // $query->andFilterWhere(['ilike', '', $this->cari]);
+        // $query->andFilterWhere(['like', '', $this->cari]);
         $query->andFilterWhere(['between', 'tanggal', $this->tanggal_dari, $this->tanggal_sampai]);
         $query->andFilterWhere(['status_aktif' => $this->status_aktif]);
         return $dataProvider;

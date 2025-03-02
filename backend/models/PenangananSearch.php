@@ -76,9 +76,9 @@ class PenangananSearch extends Penanganan
             ['updated_at' => $cari_angka],
             ['created_by' => $cari_angka],
             ['updated_by' => $cari_angka],
-            ['ilike', 'status', $this->cari],
+            ['like', 'status', $this->cari],
         ]);
-        // $query->andFilterWhere(['ilike', '', $this->cari]);
+        // $query->andFilterWhere(['like', '', $this->cari]);
         $query->andFilterWhere(['between', 'tanggal', $this->tanggal_dari, $this->tanggal_sampai]);
         $query->andFilterWhere(['status_aktif' => $this->status_aktif]);
         return $dataProvider;

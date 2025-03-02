@@ -77,12 +77,12 @@ class TreatmentSearch extends Treatment
             ['updated_at' => $cari_angka],
             ['created_by' => $cari_angka],
             ['updated_by' => $cari_angka],
-            ['ilike', 'nama', $this->cari],
-            ['ilike', 'prosedur', $this->cari],
-            ['ilike', 'durasi', $this->cari],
-            ['ilike', 'keterangan', $this->cari],
+            ['like', 'nama', $this->cari],
+            ['like', 'prosedur', $this->cari],
+            ['like', 'durasi', $this->cari],
+            ['like', 'keterangan', $this->cari],
         ]);
-        // $query->andFilterWhere(['ilike', '', $this->cari]);
+        // $query->andFilterWhere(['like', '', $this->cari]);
         $query->andFilterWhere(['between', 'tanggal', $this->tanggal_dari, $this->tanggal_sampai]);
         $query->andFilterWhere(['status_aktif' => $this->status_aktif]);
         return $dataProvider;

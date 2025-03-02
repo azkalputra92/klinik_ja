@@ -73,14 +73,14 @@ class UserSearch extends User
             ['status' => $cari_angka],
             ['created_at' => $cari_angka],
             ['updated_at' => $cari_angka],
-            ['ilike', 'username', $this->cari],
-            ['ilike', 'auth_key', $this->cari],
-            ['ilike', 'password_hash', $this->cari],
-            ['ilike', 'password_reset_token', $this->cari],
-            ['ilike', 'email', $this->cari],
-            ['ilike', 'verification_token', $this->cari],
+            ['like', 'username', $this->cari],
+            ['like', 'auth_key', $this->cari],
+            ['like', 'password_hash', $this->cari],
+            ['like', 'password_reset_token', $this->cari],
+            ['like', 'email', $this->cari],
+            ['like', 'verification_token', $this->cari],
         ]);
-        // $query->andFilterWhere(['ilike', '', $this->cari]);
+        // $query->andFilterWhere(['like', '', $this->cari]);
         $query->andFilterWhere(['between', 'tanggal', $this->tanggal_dari, $this->tanggal_sampai]);
         $query->andFilterWhere(['status_aktif' => $this->status_aktif]);
         return $dataProvider;
