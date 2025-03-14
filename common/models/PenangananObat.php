@@ -79,4 +79,13 @@ class PenangananObat extends \yii\db\ActiveRecord
 
         return parent::beforeSave($insert);
     }
+    public function afterSave($insert, $changedAttributes)
+    {
+        $this->penanganan->setHitungTotal();   
+    }
+    public function beforeDelete()
+    {
+        $this->penanganan->setHitungTotal();
+        return parent::beforeDelete();
+    }
 }
