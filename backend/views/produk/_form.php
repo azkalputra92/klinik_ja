@@ -3,11 +3,11 @@ use yii\bootstrap5\Html;
 use kartik\form\ActiveForm;
 use kartik\number\NumberControl;
 /* @var $this yii\web\View */
-/* @var $model common\models\Obat */
+/* @var $model common\models\Produk */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="obat-form">
+<div class="produk-form">
     <?php $form = ActiveForm::begin(); ?>
 
         <?= $form->field($model, 'nama')->textInput(['maxlength' => true]) ?>

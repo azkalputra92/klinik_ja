@@ -21,7 +21,7 @@ use Yii;
  * @property string|null $info_ja
  * @property string|null $riwayat_perawatan
  * @property string|null $riwayat_penyakit
- * @property string|null $riwayat_obat
+ * @property string|null $riwayat_produk
  * @property string|null $riwayat_alergi
  * @property string|null $keadaan_pasien
  * @property string|null $status
@@ -42,7 +42,7 @@ class Pasien extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tempat_lahir', 'alamat', 'info_ja', 'riwayat_perawatan', 'riwayat_penyakit', 'riwayat_obat', 'riwayat_alergi', 'keadaan_pasien'], 'string'],
+            [['tempat_lahir', 'alamat', 'info_ja', 'riwayat_perawatan', 'riwayat_penyakit', 'riwayat_produk', 'riwayat_alergi', 'keadaan_pasien'], 'string'],
             [['tanggal_lahir'], 'safe'],
             [['nama', 'jenis_kelamin', 'nomor_telepon', 'email', 'instagram', 'emergency_nama', 'emergency_nomor_telepon', 'status'], 'string', 'max' => 255],
         ];
@@ -68,7 +68,7 @@ class Pasien extends \yii\db\ActiveRecord
             'info_ja' => 'Info Ja',
             'riwayat_perawatan' => 'Riwayat Perawatan',
             'riwayat_penyakit' => 'Riwayat Penyakit',
-            'riwayat_obat' => 'Riwayat Obat',
+            'riwayat_produk' => 'Riwayat Produk',
             'riwayat_alergi' => 'Riwayat Alergi',
             'keadaan_pasien' => 'Keadaan Pasien',
             'status' => 'Status',

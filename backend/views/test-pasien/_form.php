@@ -36,7 +36,7 @@ use yii\helpers\ArrayHelper;
 
       <?= $form->field($model, 'riwayat_penyakit')->textarea(['rows' => 6]) ?>
 
-      <?= $form->field($model, 'riwayat_obat')->textarea(['rows' => 6]) ?>
+      <?= $form->field($model, 'riwayat_produk')->textarea(['rows' => 6]) ?>
 
       <?= $form->field($model, 'riwayat_alergi')->textarea(['rows' => 6]) ?>
 

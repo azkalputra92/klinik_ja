@@ -24,7 +24,7 @@ use yii\widgets\DetailView;
           'info_ja:ntext',
           'riwayat_perawatan:ntext',
           'riwayat_penyakit:ntext',
-          'riwayat_obat:ntext',
+          'riwayat_produk:ntext',
           'riwayat_alergi:ntext',
           'keadaan_pasien:ntext',
           'status',

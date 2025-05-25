@@ -4,17 +4,17 @@ use kartik\form\ActiveForm;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 /* @var $this yii\web\View */
-/* @var $model common\models\PenangananObat */
+/* @var $model common\models\PenangananProduk */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="penanganan-obat-form">
+<div class="penanganan-produk-form">
     <?php $form = ActiveForm::begin(); ?>
           
-      <?= $form->field($model, 'id_obat')->widget(Select2::classname(), [
-                'data' => ArrayHelper::map($model->listObat, 'id', 'nama'),
+      <?= $form->field($model, 'id_produk')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map($model->listProduk, 'id', 'nama'),
                 'options' => [
-                    'placeholder' => 'Pilih Obat',
+                    'placeholder' => 'Pilih Produk',
                     'class' => 'col-12 mb-3 load_ajax_change'
                 ],
                 'pluginOptions' => [

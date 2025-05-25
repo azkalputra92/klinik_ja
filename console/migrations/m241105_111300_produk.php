@@ -3,20 +3,20 @@
 use yii\db\Migration;
 
 /**
- * Class m241105_111300_obat
+ * Class m241105_111300_produk
  */
-class m241105_111300_obat extends Migration
+class m241105_111300_produk extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%penanganan_obat}}', [
+        $this->createTable('{{%penanganan_produk}}', [
             'id' => $this->primaryKey(),
             'id_penanganan' => $this->integer(),
             'id_pasien' => $this->integer(),
-            'id_obat' => $this->integer(),
+            'id_produk' => $this->integer(),
             'jumlah' => $this->integer(),
             'harga' => $this->decimal(),
             'harga_total' => $this->decimal(),
@@ -25,7 +25,7 @@ class m241105_111300_obat extends Migration
             'created_by' => $this->integer(),
             'updated_by' => $this->integer(),
         ]);
-        $this->createTable('{{%obat}}', [
+        $this->createTable('{{%produk}}', [
             'id' => $this->primaryKey(),
             'nama' => $this->string(),
             'keterangan' => $this->text(),
@@ -43,7 +43,7 @@ class m241105_111300_obat extends Migration
      */
     public function safeDown()
     {
-        echo "m241105_111300_obat cannot be reverted.\n";
+        echo "m241105_111300_produk cannot be reverted.\n";
 
         return false;
     }
@@ -57,7 +57,7 @@ class m241105_111300_obat extends Migration
 
     public function down()
     {
-        echo "m241105_111300_obat cannot be reverted.\n";
+        echo "m241105_111300_produk cannot be reverted.\n";
 
         return false;
     }

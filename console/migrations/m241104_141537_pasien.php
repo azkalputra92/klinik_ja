@@ -28,7 +28,7 @@ class m241104_141537_pasien extends Migration
             'info_ja' => $this->text(),
             'riwayat_perawatan' => $this->text(),
             'riwayat_penyakit' => $this->text(),
-            'riwayat_obat' => $this->text(),
+            'riwayat_produk' => $this->text(),
             'riwayat_alergi' => $this->text(),
             'keadaan_pasien' => $this->text(),
             'status' => $this->string(),

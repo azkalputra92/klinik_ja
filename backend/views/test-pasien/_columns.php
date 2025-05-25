@@ -108,8 +108,8 @@ return [
     // ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',
-        // 'label'=> 'Riwayat Obat',
-        // 'attribute'=>'riwayat_obat',
+        // 'label'=> 'Riwayat Produk',
+        // 'attribute'=>'riwayat_produk',
         // 'vAlign' => 'middle',
         // 'encodeLabel' => false,
     // ],

@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\PenangananObat;
+use common\models\Produk;
 
 /**
- * PenangananObatSearch represents the model behind the search form about `common\models\PenangananObat`.
+ * ProdukSearch represents the model behind the search form about `common\models\Produk`.
  */
-class PenangananObatSearch extends PenangananObat
+class ProdukSearch extends Produk
 {
     public $cari;
     public $rowdata;
@@ -23,8 +23,9 @@ class PenangananObatSearch extends PenangananObat
     public function rules()
     {
         return [
-            [['id', 'id_penanganan', 'id_pasien', 'id_obat', 'jumlah', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['harga', 'harga_total'], 'number'],
+            [['id',  'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['nama', 'keterangan'], 'safe'],
+            [['harga'], 'number'],
             [['cari','rowdata','tanggal_dari', 'tanggal_sampai'], 'safe'],
         ];
     }
@@ -47,7 +48,7 @@ class PenangananObatSearch extends PenangananObat
      */
     public function search($params)
     {
-        $query = PenangananObat::find();
+        $query = Produk::find();
         
         $this->load($params);
         $dataProvider = new ActiveDataProvider([
@@ -70,14 +71,10 @@ class PenangananObatSearch extends PenangananObat
 
         $query->andFilterWhere(['or',
             ['id' => $cari_angka],
-            ['id_penanganan' => $cari_angka],
-            ['id_pasien' => $cari_angka],
-            ['id_obat' => $cari_angka],
-            ['jumlah' => $cari_angka],
             ['harga' => $cari_angka],
-            ['harga_total' => $cari_angka],
            
-            
+            ['like', 'nama', $this->cari],
+            ['like', 'keterangan', $this->cari],
         ]);
         // $query->andFilterWhere(['like', '', $this->cari]);
         $query->andFilterWhere(['between', 'tanggal', $this->tanggal_dari, $this->tanggal_sampai]);

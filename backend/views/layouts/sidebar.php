@@ -52,8 +52,8 @@ use yii\helpers\Url;
 					</div>
 					<div class="separator mb-4 mx-4"></div>
 					<div class="menu-item">
-						<a class="menu-link" href="/admin/obat/index">
-							<span class="menu-title">List Obat</span>
+						<a class="menu-link" href="/admin/produk/index">
+							<span class="menu-title">List Produk</span>
 						</a>
 					</div>
 					<div class="menu-item">

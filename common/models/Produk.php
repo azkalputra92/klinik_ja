@@ -5,7 +5,7 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "obat".
+ * This is the model class for table "produk".
  *
  * @property int $id
  * @property string|null $nama
@@ -16,14 +16,14 @@ use Yii;
  * @property int|null $created_by
  * @property int|null $updated_by
  */
-class Obat extends \yii\db\ActiveRecord
+class Produk extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'obat';
+        return 'produk';
     }
     /**
      * {@inheritdoc}

@@ -67,10 +67,10 @@ class Penanganan extends \yii\db\ActiveRecord
 
     public function setHitungTotal()
     {
-        $obat = PenangananObat::find()->where(['id_penanganan'=>$this->id])->sum('harga');
+        $produk = PenangananProduk::find()->where(['id_penanganan'=>$this->id])->sum('harga');
         $treatment = PenangananTreatment::find()->where(['id_penanganan'=>$this->id])->sum('harga');
 
-        $this->harga_total = $obat + $treatment;
+        $this->harga_total = $produk + $treatment;
         $this->save(); 
     }
 }

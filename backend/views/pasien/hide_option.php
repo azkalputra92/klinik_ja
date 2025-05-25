@@ -47,7 +47,7 @@
             <input type="checkbox" id = "13"> <label for = "13">Riwayat Penyakit</label>
         </span></li>
         <li><span class="dropdown-item hidecolumn" data-column="14">
-            <input type="checkbox" id = "14"> <label for = "14">Riwayat Obat</label>
+            <input type="checkbox" id = "14"> <label for = "14">Riwayat Produk</label>
         </span></li>
         <li><span class="dropdown-item hidecolumn" data-column="15">
             <input type="checkbox" id = "15"> <label for = "15">Riwayat Alergi</label>

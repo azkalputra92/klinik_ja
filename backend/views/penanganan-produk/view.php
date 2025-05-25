@@ -3,9 +3,9 @@
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\PenangananObat */
+/* @var $model common\models\PenangananProduk */
 ?>
-<div class="penanganan-obat-view">
+<div class="penanganan-produk-view">
 
     <?= DetailView::widget([
         'model' => $model,
@@ -13,7 +13,7 @@ use yii\widgets\DetailView;
                       'id',
           'id_penanganan',
           'id_pasien',
-          'id_obat',
+          'id_produk',
           'jumlah',
           'harga',
           'harga_total',

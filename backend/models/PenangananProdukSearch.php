@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Obat;
+use common\models\PenangananProduk;
 
 /**
- * ObatSearch represents the model behind the search form about `common\models\Obat`.
+ * PenangananProdukSearch represents the model behind the search form about `common\models\PenangananProduk`.
  */
-class ObatSearch extends Obat
+class PenangananProdukSearch extends PenangananProduk
 {
     public $cari;
     public $rowdata;
@@ -23,9 +23,8 @@ class ObatSearch extends Obat
     public function rules()
     {
         return [
-            [['id',  'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['nama', 'keterangan'], 'safe'],
-            [['harga'], 'number'],
+            [['id', 'id_penanganan', 'id_pasien', 'id_produk', 'jumlah', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['harga', 'harga_total'], 'number'],
             [['cari','rowdata','tanggal_dari', 'tanggal_sampai'], 'safe'],
         ];
     }
@@ -48,7 +47,7 @@ class ObatSearch extends Obat
      */
     public function search($params)
     {
-        $query = Obat::find();
+        $query = PenangananProduk::find();
         
         $this->load($params);
         $dataProvider = new ActiveDataProvider([
@@ -71,10 +70,14 @@ class ObatSearch extends Obat
 
         $query->andFilterWhere(['or',
             ['id' => $cari_angka],
+            ['id_penanganan' => $cari_angka],
+            ['id_pasien' => $cari_angka],
+            ['id_produk' => $cari_angka],
+            ['jumlah' => $cari_angka],
             ['harga' => $cari_angka],
+            ['harga_total' => $cari_angka],
            
-            ['like', 'nama', $this->cari],
-            ['like', 'keterangan', $this->cari],
+            
         ]);
         // $query->andFilterWhere(['like', '', $this->cari]);
         $query->andFilterWhere(['between', 'tanggal', $this->tanggal_dari, $this->tanggal_sampai]);

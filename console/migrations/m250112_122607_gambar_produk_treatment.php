@@ -3,16 +3,16 @@
 use yii\db\Migration;
 
 /**
- * Class m250112_122607_gambar_obat_treatment
+ * Class m250112_122607_gambar_produk_treatment
  */
-class m250112_122607_gambar_obat_treatment extends Migration
+class m250112_122607_gambar_produk_treatment extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->addColumn('obat', 'gambar', $this->integer());
+        $this->addColumn('produk', 'gambar', $this->integer());
 
     }
 
@@ -21,7 +21,7 @@ class m250112_122607_gambar_obat_treatment extends Migration
      */
     public function safeDown()
     {
-        echo "m250112_122607_gambar_obat_treatment cannot be reverted.\n";
+        echo "m250112_122607_gambar_produk_treatment cannot be reverted.\n";
 
         return false;
     }
@@ -35,7 +35,7 @@ class m250112_122607_gambar_obat_treatment extends Migration
 
     public function down()
     {
-        echo "m250112_122607_gambar_obat_treatment cannot be reverted.\n";
+        echo "m250112_122607_gambar_produk_treatment cannot be reverted.\n";
 
         return false;
     }

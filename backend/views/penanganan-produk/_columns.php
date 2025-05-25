@@ -17,7 +17,7 @@ return [
     // ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'obat.nama',
+        'attribute'=>'produk.nama',
         //'vAlign' => 'middle',
         'contentOptions' => ['style'=>'vertical-align: top;'],
         'encodeLabel' => false,

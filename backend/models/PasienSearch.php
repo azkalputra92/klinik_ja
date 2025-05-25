@@ -24,7 +24,7 @@ class PasienSearch extends Pasien
     {
         return [
             [['id'], 'integer'],
-            [['nama', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'alamat', 'nomor_telepon', 'email', 'instagram', 'emergency_nama', 'emergency_nomor_telepon', 'info_ja', 'riwayat_perawatan', 'riwayat_penyakit', 'riwayat_obat', 'riwayat_alergi', 'keadaan_pasien', 'status'], 'safe'],
+            [['nama', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'alamat', 'nomor_telepon', 'email', 'instagram', 'emergency_nama', 'emergency_nomor_telepon', 'info_ja', 'riwayat_perawatan', 'riwayat_penyakit', 'riwayat_produk', 'riwayat_alergi', 'keadaan_pasien', 'status'], 'safe'],
             [['cari','rowdata','tanggal_dari', 'tanggal_sampai'], 'safe'],
         ];
     }
@@ -83,7 +83,7 @@ class PasienSearch extends Pasien
             ['like', 'info_ja', $this->cari],
             ['like', 'riwayat_perawatan', $this->cari],
             ['like', 'riwayat_penyakit', $this->cari],
-            ['like', 'riwayat_obat', $this->cari],
+            ['like', 'riwayat_produk', $this->cari],
             ['like', 'riwayat_alergi', $this->cari],
             ['like', 'keadaan_pasien', $this->cari],
             ['like', 'status', $this->cari],

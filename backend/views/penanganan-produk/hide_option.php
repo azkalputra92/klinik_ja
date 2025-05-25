@@ -14,7 +14,7 @@
             <input type="checkbox" id = "2"> <label for = "2">Id Pasien</label>
         </span></li>
         <li><span class="dropdown-item hidecolumn" data-column="3">
-            <input type="checkbox" id = "3"> <label for = "3">Id Obat</label>
+            <input type="checkbox" id = "3"> <label for = "3">Id Produk</label>
         </span></li>
         <li><span class="dropdown-item hidecolumn" data-column="4">
             <input type="checkbox" id = "4"> <label for = "4">Jumlah</label>

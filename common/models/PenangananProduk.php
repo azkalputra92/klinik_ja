@@ -5,12 +5,12 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "penanganan_obat".
+ * This is the model class for table "penanganan_produk".
  *
  * @property int $id
  * @property int|null $id_penanganan
  * @property int|null $id_pasien
- * @property int|null $id_obat
+ * @property int|null $id_produk
  * @property int|null $jumlah
  * @property float|null $harga
  * @property float|null $harga_total
@@ -19,14 +19,14 @@ use Yii;
  * @property int|null $created_by
  * @property int|null $updated_by
  */
-class PenangananObat extends \yii\db\ActiveRecord
+class PenangananProduk extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'penanganan_obat';
+        return 'penanganan_produk';
     }
 
     /**
@@ -35,8 +35,8 @@ class PenangananObat extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_penanganan', 'id_pasien', 'id_obat', 'jumlah', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'default', 'value' => null],
-            [['id_penanganan', 'id_pasien', 'id_obat', 'jumlah', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['id_penanganan', 'id_pasien', 'id_produk', 'jumlah', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'default', 'value' => null],
+            [['id_penanganan', 'id_pasien', 'id_produk', 'jumlah', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['harga', 'harga_total'], 'number'],
         ];
     }
@@ -50,7 +50,7 @@ class PenangananObat extends \yii\db\ActiveRecord
             'id' => 'ID',
             'id_penanganan' => 'Penanganan',
             'id_pasien' => 'Pasien',
-            'id_obat' => 'Obat',
+            'id_produk' => 'Produk',
             'jumlah' => 'Jumlah',
             'harga' => 'Harga',
             'harga_total' => 'Harga Total',
@@ -64,17 +64,17 @@ class PenangananObat extends \yii\db\ActiveRecord
     {
         return Penanganan::find()->where(['id'=>$this->id_penanganan])->one();
     }
-    public function getObat()
+    public function getProduk()
     {
-        return Obat::find()->where(['id'=>$this->id_obat])->one();
+        return Produk::find()->where(['id'=>$this->id_produk])->one();
     }
-    public function getListObat()
+    public function getListProduk()
     {
-        return Obat::find()->all();
+        return Produk::find()->all();
     }
     public function beforeSave($insert)
     {
-        $this->harga = $this->obat->harga;
+        $this->harga = $this->produk->harga;
         $this->harga_total = $this->harga * $this->jumlah;
 
         return parent::beforeSave($insert);

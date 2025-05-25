@@ -3,9 +3,9 @@
 use yii\bootstrap5\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Obat */
+/* @var $model common\models\PenangananProduk */
 ?>
-<div class="obat-update">
+<div class="penanganan-produk-update">
 
     <?= $this->render('_form', [
         'model' => $model,

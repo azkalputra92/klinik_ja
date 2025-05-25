@@ -1,7 +1,7 @@
 <?php
 
 namespace frontend\controllers;
-use common\models\Obat;
+use common\models\Produk;
 use common\models\Treatment;
 
 
@@ -25,7 +25,7 @@ class SiteController extends Controller
     }
     public function actionProduct()
     {
-        $model = Obat::find()->all();
+        $model = Produk::find()->all();
         return $this->render('product',['model'=>$model]);
     }
 }

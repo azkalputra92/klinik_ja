@@ -54,7 +54,7 @@ return [
         'class' => 'kartik\grid\ActionColumn',
         'header' => '',
         // 'template' => '<div class="d-flex align-items-center w-100 gap-3 justify-content-center">{treatment}{penanganan}{}{}</div>',
-        'template' => '{treatment}{obat}{penanganan}{edit}{delete}{print}',
+        'template' => '{treatment}{produk}{penanganan}{edit}{delete}{print}',
         'width'=>'10%',
         'vAlign' => 'middle',
         'buttons' => [
@@ -76,11 +76,11 @@ return [
                 );
             }
         },
-        "obat" => function ($url, $model, $key) {
+        "produk" => function ($url, $model, $key) {
             if($model->status == 'Selesai Treatment'){
                 return Html::a(
-                'Beli Obat',
-                ['penanganan-obat/index', 'id_penanganan' => $model->id],
+                'Beli Produk',
+                ['penanganan-produk/index', 'id_penanganan' => $model->id],
                 ['role' => 'modal-remote', 'title' => 'treatment', 'class' => 'btn btn-primary btn-block mb-2']
                 );
             }

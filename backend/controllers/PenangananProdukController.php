@@ -3,8 +3,8 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Obat;
-use backend\models\ObatSearch;
+use common\models\PenangananProduk;
+use backend\models\PenangananProdukSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -14,9 +14,9 @@ use yii\filters\AccessControl;
 use yii\web\ForbiddenHttpException;
 
 /**
- * ObatController implements the CRUD actions for Obat model.
+ * PenangananProdukController implements the CRUD actions for PenangananProduk model.
  */
-class ObatController extends Controller
+class PenangananProdukController extends Controller
 {
     /**
      * @inheritdoc
@@ -33,12 +33,12 @@ class ObatController extends Controller
                     ],
                 ],
             ],
-            // 'verbs' => [
-            //     'class' => VerbFilter::className(),
-            //     'actions' => [
-            //         'delete' => ['POST'],
-            //     ],
-            // ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
         ];
     }
 
@@ -53,22 +53,39 @@ class ObatController extends Controller
     }
 
     /**
-     * Lists all Obat models.
+     * Lists all PenangananProduk models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($id_penanganan = null)
     {
-                    $searchModel = new ObatSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $request = Yii::$app->request;
+        $searchModel = new PenangananProdukSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere(['id_penanganan'=>$id_penanganan]);
+        
+        if ($request->isAjax) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return [
+                'title' => "PenangananProduk",
+                'content' => $this->renderAjax('index', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+                    'id_penanganan' => $id_penanganan,
+                ]),
+                'footer' => Html::button('Batal', ['class' => 'btn btn-outline-primary pull-left', 'data-bs-dismiss' => "modal"]) 
+            ];
+        } else {
             return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
+                'id_penanganan' => $id_penanganan,
             ]);
-            }
+        }
+            
+    }
 
     /**
-     * Displays a single Obat model.
+     * Displays a single PenangananProduk model.
      * @param integer $id
      * @return mixed
      */
@@ -78,7 +95,7 @@ class ObatController extends Controller
         if ($request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                'title' => "Obat",
+                'title' => "PenangananProduk",
                 'content' => $this->renderAjax('view', [
                     'model' => $this->findModel($id),
                 ]),
@@ -93,16 +110,17 @@ class ObatController extends Controller
     }
 
     /**
-     * Creates a new Obat model.
+     * Creates a new PenangananProduk model.
      * For ajax request will return json object
      * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id_penanganan)
     {
         $request = Yii::$app->request;
-        $model = new Obat();
-        
+        $model = new PenangananProduk();
+        $model->id_penanganan = $id_penanganan;
+        $model->id_pasien = $model->penanganan->id_pasien;
         if ($request->isAjax) {
             /*
              * Process for ajax request
@@ -110,11 +128,12 @@ class ObatController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if ($request->isGet) {
                 return [
-                    'title' => "Tambah Obat",
+                    'title' => "Tambah Penanganan Produk",
                     'content' => $this->renderAjax('create', [
                         'model' => $model,
                     ]),
-                    'footer' => Html::button('Batal', ['class' => 'btn btn-outline-primary pull-left', 'data-bs-dismiss' => "modal"]) .
+                    'footer' => 
+                        Html::a('Batal', ['index','id_penanganan'=>$id_penanganan],['class' => 'btn btn-outline-primary pull-left', 'role' => 'modal-remote']).
                         Html::button('Simpan Data', ['class' => 'btn btn-primary', 'type' => "submit"])
                 ];
             } else if ($model->load($request->post()) && $model->save()) {
@@ -130,22 +149,24 @@ class ObatController extends Controller
                             <h5 class="color-text-10 text-center fw-600 mb-5">Berhasil Membuat</h5>
                             <p class="text-center color-text-7 fs-14 mb-5">-</p>
                             <div class="d-flex justify-content-center pt-3"> '  .
-                                Html::button('Batal', ['class' => 'btn btn-outline-primary pull-left', 'data-bs-dismiss' => "modal"]) .
-                                Html::a('Tambah Lagi', ['create'], ['class' => 'btn btn-primary', 'role' => 'modal-remote', 'onclick'=>'showSiblingModel()' ]) . 
+                                Html::a('Batal', ['index','id_penanganan'=>$id_penanganan],['class' => 'btn btn-outline-primary pull-left', 'role' => 'modal-remote']).
+                                Html::a('Tambah Lagi', ['create','id_penanganan'=>$id_penanganan], ['class' => 'btn btn-primary', 'role' => 'modal-remote', 'onclick'=>'showSiblingModel()' ]) . 
                             '</div>
                         </div>
                         <script>modalKonfirmasi(false,false);</script>
                     ',
-                    'footer' => Html::button('Batal', ['class' => 'btn btn-outline-primary pull-left', 'data-bs-dismiss' => "modal"]) .
-                        Html::a('Tambah Lagi', ['create'], ['class' => 'btn btn-primary', 'role' => 'modal-remote'])
+                    'footer' => 
+                        Html::a('Batal', ['index','id_penanganan'=>$id_penanganan],['class' => 'btn btn-outline-primary pull-left', 'role' => 'modal-remote']).
+                        Html::a('Tambah Lagi', ['create','id_penanganan'=>$id_penanganan], ['class' => 'btn btn-primary', 'role' => 'modal-remote'])
                 ];
             } else {
                 return [
-                    'title' => "Tambah Obat",
+                    'title' => "Tambah Penanganan Produk",
                     'content' => $this->renderAjax('create', [
                         'model' => $model,
                     ]),
-                    'footer' => Html::button('Batal', ['class' => 'btn btn-outline-primary pull-left', 'data-bs-dismiss' => "modal"]) .
+                    'footer' => 
+                        Html::a('Batal', ['index','id_penanganan'=>$id_penanganan],['class' => 'btn btn-outline-primary pull-left', 'role' => 'modal-remote']).
                         Html::button('Simpan Data', ['class' => 'btn btn-primary', 'type' => "submit"])
                 ];
             }
@@ -164,7 +185,7 @@ class ObatController extends Controller
     }
 
     /**
-     * Updates an existing Obat model.
+     * Updates an existing PenangananProduk model.
      * For ajax request will return json object
      * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
@@ -182,7 +203,7 @@ class ObatController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if ($request->isGet) {
                 return [
-                    'title' => "Ubah Obat",
+                    'title' => "Ubah Penanganan Produk",
                     'content' => $this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -210,7 +231,7 @@ class ObatController extends Controller
                 ];
             } else {
                 return [
-                    'title' => "Ubah Obat",
+                    'title' => "Ubah Penanganan Produk",
                     'content' => $this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -233,7 +254,7 @@ class ObatController extends Controller
     }
 
     /**
-     * Delete an existing Obat model.
+     * Delete an existing PenangananProduk model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -263,6 +284,7 @@ class ObatController extends Controller
                             <div class="text-center pt-3">' . 
                                 Html::button('Tutup', ['class' => 'btn btn-def-warning btn-block  btn-sm', 'data-bs-dismiss' => "modal"]) 
                         . '</div>
+                        </div><script>modalKonfirmasi(false,false);</script>
                     ',
                 'footer' => Html::button('Batal', ['class' => 'btn btn-outline-primary pull-left', 'data-bs-dismiss' => "modal"])
             ];
@@ -275,15 +297,15 @@ class ObatController extends Controller
     }
 
     /**
-     * Finds the Obat model based on its primary key value.
+     * Finds the PenangananProduk model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Obat the loaded model
+     * @return PenangananProduk the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-                if (($model = Obat::findOne($id)) !== null) {
+                if (($model = PenangananProduk::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
