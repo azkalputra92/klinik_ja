@@ -28,6 +28,7 @@ class Produk extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public $file;
     public function rules()
     {
         return [

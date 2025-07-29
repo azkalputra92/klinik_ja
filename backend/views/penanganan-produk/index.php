@@ -11,7 +11,7 @@ use yii\bootstrap5\ActiveForm;
 /* @var $searchModel backend\models\PenangananProdukSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = "Penanganan Produk";
+$this->title = "Produk";
 $this->params['breadcrumbs'][] = $this->title;
 $this->params['judulHalaman'] = $this->title;
 $this->params['subJudul'] = "";
@@ -48,14 +48,14 @@ $this->registerJs("$('.modal-dialog').addClass('modal-dialog-centered')");
     'responsiveWrap' => false,
     'panelHeadingTemplate' => '<div class="d-flex justify-content-between w-100">
         <div class="d-flex align-items-center">
-            <h5 class="fw-normal mb-2 mb-md-0 fw-500 fs-16">Semua Penanganan Produk</h5>
+            <h5 class="fw-normal mb-2 mb-md-0 fw-500 fs-16">Semua Produk</h5>
         </div>
 
         <div class="d-flex justify-content-start justify-content-md-end align-items-center">'.
             Html::a(
-            'Tambah Penanganan Produk',
+            'Tambah Produk',
             ['create','id_penanganan'=>$id_penanganan],
-            ['role' => 'modal-remote', 'title' => 'Tambah Penanganan Produk', 'class' => 'btn btn btn-primary', 'style' => 'width: fit-content;']
+            ['role' => 'modal-remote', 'title' => 'Tambah Produk', 'class' => 'btn btn btn-primary', 'style' => 'width: fit-content;']
             ).'
         </div>
     </div>',

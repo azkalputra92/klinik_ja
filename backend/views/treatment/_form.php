@@ -30,6 +30,10 @@ use kartik\form\ActiveForm;
             ],
         ])?>
 
+        <?= $form->field($model, 'link')->textarea(['rows' => 3]) ?>
+
+        <?= $form->field($model, 'file')->fileInput() ?>
+
         
     <?php if (!Yii::$app->request->isAjax){ ?>
         <div class="form-group">

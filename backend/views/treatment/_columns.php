@@ -47,7 +47,7 @@ return [
         'vAlign' => 'middle',
         'encodeLabel' => false,
         'value'=> function($model){
-            return  number_format($model->harga);
+            return  number_format(($model->harga) ?? 0);
         }
     ],
     [
@@ -57,6 +57,14 @@ return [
         //'vAlign' => 'middle',
         'contentOptions' => ['style'=>'vertical-align: top;'],
         'encodeLabel' => false,
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'label'=>'Gambar',
+        'format' => 'raw',
+        'value'=> function($model){
+            return Html::img(['/file','id'=>$model->gambar],['style'=>'width: 100px;']);
+        }
     ],
 [
 'class' => 'kartik\grid\ActionColumn',

@@ -56,15 +56,15 @@ class PenangananController extends Controller
      */
     public function actionIndex()
     {
-            $searchModel = new PenangananSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-            $dataProvider->query->orderBy(['id' => SORT_DESC]);
+        $searchModel = new PenangananSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->orderBy(['id' => SORT_DESC]);
 
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
-            }
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 
     /**
      * Displays a single Penanganan model.

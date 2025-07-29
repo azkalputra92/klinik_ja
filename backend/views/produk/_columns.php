@@ -26,7 +26,7 @@ return [
         'vAlign' => 'middle',
         'encodeLabel' => false,
         'value'=> function($model){
-            return  number_format($model->harga);
+            return  number_format($model->harga ?? 0);
         }
     ],
     [

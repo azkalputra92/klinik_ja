@@ -38,7 +38,7 @@ return [
         'format' => 'raw',
         'encodeLabel' => false,
         'value'=> function($model){
-            return  number_format($model->harga);
+            return  number_format($model->harga ?? 0);
         }
 
     ],
@@ -48,7 +48,7 @@ return [
         'attribute'=>'harga_total',
         'encodeLabel' => false,
         'value'=> function($model){
-            return  number_format($model->harga);
+            return  number_format($model->harga ?? 0);
         }
 
     ],

@@ -7,7 +7,7 @@ use yii\helpers\Url;
 <div class="header_section">
       <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="../"
+          <a class="navbar-brand" href="<?= Url::toRoute(['index'])?>"
             ><img src="/images/logo.png"
           /></a>
           <button
@@ -24,7 +24,7 @@ use yii\helpers\Url;
           <div class="collapse navbar-collapse" style="justify-content: flex-end;" id="navbarSupportedContent">
             <ul class="navbar-nav ">
                <li class="nav-item">
-                  <a class="nav-link" href="../">Home</a>
+                  <a class="nav-link" href="<?= Url::toRoute(['index']) ; ?>">Home</a>
                </li>
                <li class="nav-item">
                   <a class="nav-link" href="<?= Url::toRoute(['treatment']); ?>">Treatment</a>
@@ -87,7 +87,7 @@ use yii\helpers\Url;
                       experience will help you achieve and enhance your natural
                       beauty and improve your skin.
                     </p>
-                    <div class="started_text"><a href="#">Contact Us Now!</a></div>
+                    <div class="started_text"><a target="blank_" href="https://wa.link/ucrix7">Contact Us Now!</a></div>
                   </div>
                   <div class="col-sm-6">
                     <div class="banner_img">
@@ -181,10 +181,10 @@ use yii\helpers\Url;
                </span>
             </div>
             <div class="col-md-6">
-            <div class="started_text"><a href="#"> <img src="/images/map.svg"/> Our Location</a></div>
+            <div class="started_text"><a target="blank_" href="https://maps.app.goo.gl/XsUJ3BPoBcnTw34m9"> <img src="/images/map.svg"/> Our Location</a></div>
             </div>
             <div class="col-md-6">
-               <div class="started_text"><a href="#"><img src="/images/whatsapp.svg"/> Contact Us Now!</a></div>
+               <div class="started_text"><a target="blank_" href="https://wa.link/ucrix7"><img src="/images/whatsapp.svg"/> Contact Us Now!</a></div>
             </div>
          </div>
     </div>

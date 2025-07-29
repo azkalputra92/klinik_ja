@@ -66,6 +66,11 @@ use yii\helpers\Url;
 							<span class="menu-title">User</span>
 						</a>
 					</div>
+					<div class="menu-item">
+						<a class="menu-link" href="/admin/laporan/index">
+							<span class="menu-title">Laporan</span>
+						</a>
+					</div>
 				</div>
 			</div>
 

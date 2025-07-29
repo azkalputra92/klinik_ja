@@ -66,7 +66,7 @@ class PenangananProdukController extends Controller
         if ($request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                'title' => "PenangananProduk",
+                'title' => "Produk",
                 'content' => $this->renderAjax('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
@@ -95,7 +95,7 @@ class PenangananProdukController extends Controller
         if ($request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                'title' => "PenangananProduk",
+                'title' => "Produk",
                 'content' => $this->renderAjax('view', [
                     'model' => $this->findModel($id),
                 ]),
@@ -128,7 +128,7 @@ class PenangananProdukController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if ($request->isGet) {
                 return [
-                    'title' => "Tambah Penanganan Produk",
+                    'title' => "Tambah Produk",
                     'content' => $this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -161,7 +161,7 @@ class PenangananProdukController extends Controller
                 ];
             } else {
                 return [
-                    'title' => "Tambah Penanganan Produk",
+                    'title' => "Tambah Produk",
                     'content' => $this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -203,7 +203,7 @@ class PenangananProdukController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if ($request->isGet) {
                 return [
-                    'title' => "Ubah Penanganan Produk",
+                    'title' => "Ubah Produk",
                     'content' => $this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -231,7 +231,7 @@ class PenangananProdukController extends Controller
                 ];
             } else {
                 return [
-                    'title' => "Ubah Penanganan Produk",
+                    'title' => "Ubah Produk",
                     'content' => $this->renderAjax('update', [
                         'model' => $model,
                     ]),

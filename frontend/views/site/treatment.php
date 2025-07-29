@@ -1,7 +1,10 @@
+<?php 
+use yii\helpers\Url;
+?>
 <div class="header_treatment">
          <div class="container">
            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-             <a class="navbar-brand" href="index.html"
+             <a class="navbar-brand" href="index"
                ><img src="/images/logo.png"
              /></a>
              <button
@@ -73,24 +76,43 @@
                     <div class="col-md-6 mb-4">
                       <div class="services_box">
                           <div class="title_treatment"><?= $value->nama ?></div>
-                          <span>
-                            <?= $value->keterangan ?>
-                            <br/>
-                          </span>
-                          <span class = 'title_desk_treatment'>
-                            Prosedur : 
-                          </span>
-                          <span >
-                            <?= $value->prosedur ?>
-                            <br/>
-                          </span>
-                          <span class = 'title_desk_treatment'>
-                            Durasi : 
-                          </span>
-                          <span >
-                            <?= $value->durasi ?>
-                            <br/>
-                          </span>
+                            <div class="row">
+                              <div class="col-6">
+                                <span>
+                                  <img src="<?= Url::to(['/file','id'=>$value->gambar])?>" />
+                                  <br/>
+                                </span>
+                              </div>
+                              <div class="col-6">
+                                <span>
+                                  <?= $value->keterangan ?>
+                                  <br/>
+                                </span>
+                                <span class = 'title_desk_treatment'>
+                                  Prosedur : 
+                                </span>
+                                <span >
+                                  <?= $value->prosedur ?>
+                                  <br/>
+                                </span>
+                                <span class = 'title_desk_treatment'>
+                                  Durasi : 
+                                </span>
+                                <span >
+                                  <?= $value->durasi ?>
+                                  <br/>
+                                </span>
+                                <span >
+                                  <div class="started_text">
+                                    <a href="<?= $value->link ?>" target='_blank'>
+                                      More Info!</a
+                                    >
+                                  </div>
+                                  <br/>
+                                </span>
+                              </div>
+                            </div>
+
                       </div>
                     </div>
                   <?php } ?>

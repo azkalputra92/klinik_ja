@@ -31,6 +31,7 @@ class Treatment extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public $file;
     public function rules()
     {
         return [
@@ -38,10 +39,23 @@ class Treatment extends \yii\db\ActiveRecord
             [[ 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['keterangan'], 'string'],
             [['harga'], 'number'],
+            [['gambar','link'], 'safe'],
             [['nama', 'prosedur', 'durasi'], 'string', 'max' => 255],
         ];
     }
-    
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => 'mdm\upload\UploadBehavior',
+                'attribute' => 'file', // required, use to receive input file
+                'savedAttribute' => 'gambar', // optional, use to link model with saved file.
+                'uploadPath' => '@common/upload', // saved directory. default to '@runtime/upload'
+                'autoSave' => true, // when true then uploaded file will be save before ActiveRecord::save()
+                'autoDelete' => true, // when true then uploaded file will deleted before ActiveRecord::delete()
+            ],
+        ];
+    }
     /**
      * {@inheritdoc}
      */

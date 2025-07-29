@@ -4,7 +4,7 @@ use yii\helpers\Url;
 <div class="header_product">
       <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="index.html"
+          <a class="navbar-brand" href="<?= Url::toRoute(['index'])?>"
             ><img src="/images/logo.png"
           /></a>
           <button

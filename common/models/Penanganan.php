@@ -60,6 +60,14 @@ class Penanganan extends \yii\db\ActiveRecord
     {
         return Pasien::find()->where(['id'=>$this->id_pasien])->one();
     }
+    public function getPenangananTreatment()
+    {
+        return PenangananTreatment::find()->where(['id_penanganan'=>$this->id])->all();
+    }
+    public function getPenangananProduk()
+    {
+        return PenangananProduk::find()->where(['id_penanganan'=>$this->id])->all();
+    }
     public function getListPasien()
     {
         return Pasien::find()->all();

@@ -17,7 +17,7 @@ return [
     // ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'label'=> 'Id Treatment',
+        'label'=> 'Treatment',
         'attribute'=>'treatment.nama',
         //'vAlign' => 'middle',
         'contentOptions' => ['style'=>'vertical-align: top;'],
@@ -29,7 +29,7 @@ return [
         'contentOptions' => ['style'=>'vertical-align: top;'],
         'encodeLabel' => false,
         'value'=> function($model){
-            return  number_format($model->harga);
+            return  number_format($model->harga ?? 0);
         }
     ],
 

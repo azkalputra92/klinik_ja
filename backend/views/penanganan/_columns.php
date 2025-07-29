@@ -46,7 +46,7 @@ return [
         'format' => 'raw',
         'encodeLabel' => false,
         'value'=> function($model){
-            return  number_format($model->harga_total);
+            return  number_format($model->harga_total ?? 0);
         }
     ],
 
