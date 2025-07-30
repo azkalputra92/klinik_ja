@@ -28,6 +28,7 @@ class LaporanController extends Controller
 
             $data = Penanganan::find()
             ->andFilterWhere(['BETWEEN', 'tanggal', $model->tanggal_dari, $model->tanggal_sampai])
+            ->andFilterWhere(['status'=>'Selesai'])
             ->all();
             $content = $this->renderPartial('cetak', [
                 'data' => $data,
